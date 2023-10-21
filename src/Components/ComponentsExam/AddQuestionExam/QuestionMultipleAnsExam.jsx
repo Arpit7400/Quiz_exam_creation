@@ -113,7 +113,7 @@ const QuestionMultipleAnsExam = (props) => {
       formData.append(`option${i + 1}_image`, optionImageInput);
     }
     if(doit){
-      formData.append('question_no', editid.qno); 
+      formData.append('question_no', 'q'+editid.qno); 
        axios
          .post(`${link}/create_questions/${editid.id}`, formData)
          .then((response) => {
@@ -146,7 +146,7 @@ const QuestionMultipleAnsExam = (props) => {
          });
     }
      else {
-        formData.append('question_no', examid.qno); 
+        formData.append('question_no', 'q'+examid.qno); 
        axios
          .post(`${link}/create_questions/${examid.id}`, formData)
          .then((response) => {

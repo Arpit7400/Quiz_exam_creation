@@ -30,6 +30,7 @@ const CreateUser = () => {
   const [passwordError, setPasswordError] = useState(false);
 
   const [emailErrorMsg, setEmailErrorMsg] = useState('User Id is required.');
+  const [userLength, setUserLength] = useState('User Id must be 6 character')
   const passwordErrorMsg = 'Password is required.';
   const retypePasswordErrorMsg = 'Passwords do not match.';
 

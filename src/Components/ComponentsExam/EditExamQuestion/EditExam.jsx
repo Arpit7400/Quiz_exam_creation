@@ -53,7 +53,7 @@ import { mainBoxStyle, sideDetail } from "../../../styles/style";
     formData.append('topic_name', exam.Topic); 
       formData.append('level', exam.Level);
     formData.append('language', exam.Language);  
-    formData.append('per_question_time', exam.perquest); 
+    formData.append('time_per_question', exam.perquest); 
     formData.append('assigned_time', exam.assigned_time); 
     formData.append('instruction', instruction); 
     formData.append('learning', learning); 
