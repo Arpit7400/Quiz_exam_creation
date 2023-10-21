@@ -47,14 +47,16 @@ const CreateQuiz = ({
     if (!exam.Language || !exam.Class || !exam.Subject || !exam.Topic|| !exam.perquest||!exam.Level|| !exam.assigned_time   ) {
       enqueueSnackbar('Please select all dropdown', { variant: 'error' })
     }else{
+      let assigntime = parseInt(exam.assigned_time.slice(0,3))
+      let perquesttime = parseInt(exam.perquest.slice(0,1))
      const formData = new FormData();
     formData.append('subject', exam.Subject); 
     formData.append('topic_class', exam.Class); 
     formData.append('topic_name', exam.Topic); 
     formData.append('language', exam.Language); 
     formData.append('level', exam.Level); 
-    formData.append('time_per_question', exam.perquest); 
-    formData.append('assigned_time', exam.assigned_time); 
+    formData.append('time_per_question', perquesttime); 
+    formData.append('assigned_time', assigntime); 
     formData.append('instruction', instruction); 
     formData.append('learning', learning); 
     formData.append('eligiblity', eligiblity); 
@@ -73,7 +75,7 @@ const CreateQuiz = ({
         }
       })
       .catch((err) => {
-        console.log(err.response.data);
+        console.log(err.response);
       });
   }
 }

@@ -47,14 +47,16 @@ import { mainBoxStyle, sideDetail } from "../../../styles/style";
     }
     const handlePostQuestion = () => {
     // console.log(exam)
+    let assigntime = parseInt(exam.assigned_time.slice(0,3))
+    let perquesttime = parseInt(exam.perquest.slice(0,1))
      const formData = new FormData();
     formData.append('subject', exam.Subject); 
     formData.append('topic_class', exam.Class); 
     formData.append('topic_name', exam.Topic); 
       formData.append('level', exam.Level);
     formData.append('language', exam.Language);  
-    formData.append('time_per_question', exam.perquest); 
-    formData.append('assigned_time', exam.assigned_time); 
+    formData.append('time_per_question', perquesttime); 
+    formData.append('assigned_time', assigntime); 
     formData.append('instruction', instruction); 
     formData.append('learning', learning); 
     formData.append('eligiblity', eligiblity); 

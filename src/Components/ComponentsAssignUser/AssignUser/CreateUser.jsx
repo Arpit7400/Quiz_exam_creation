@@ -30,7 +30,6 @@ const CreateUser = () => {
   const [passwordError, setPasswordError] = useState(false);
 
   const [emailErrorMsg, setEmailErrorMsg] = useState('User Id is required.');
-  const [userLength, setUserLength] = useState('User Id must be 6 character')
   const passwordErrorMsg = 'Password is required.';
   const retypePasswordErrorMsg = 'Passwords do not match.';
 
@@ -64,7 +63,11 @@ const CreateUser = () => {
       setEmailErrorMsg('User Id is required.');
     } else if (!emailPattern.test(value)) {
       setEmailError(true);
-    } else {
+    } else if(value.length<6){
+      setEmailError(true)
+      setEmailErrorMsg("At least 6 letters")
+    }
+    else {
       setEmailError(false);
     }
 
@@ -164,8 +167,9 @@ sx={{
         <Box >
           <FormControl fullWidth>
             <Input
-            sx={inputStyle}
-            disableUnderline ={true}
+            required
+              sx={inputStyle}
+              disableUnderline ={true}
               type="text"
               name="fullName"
               value={fullName}
@@ -180,6 +184,7 @@ sx={{
         <Box >
           <FormControl fullWidth >
             <Input
+            required
             sx={inputStyle}
             disableUnderline ={true}
               type="email"
@@ -196,6 +201,7 @@ sx={{
         <Box >
           <FormControl fullWidth>
             <Input
+            required
             sx={inputStyle}
               disableUnderline ={true}
               type={showPassword ? 'text' : 'password'}
@@ -233,7 +239,8 @@ sx={{
         <Box >
           <FormControl fullWidth>
             <Input
-            sx={inputStyle}
+              required
+              sx={inputStyle}
               disableUnderline ={true}
               type={showPassword ? 'text' : 'password'}
               name="password"
@@ -251,6 +258,7 @@ sx={{
         </Box>
         <Box >
           <Button
+          type='submit'
           sx={{
             mt:'20px',
             width: "375px",
@@ -270,7 +278,7 @@ sx={{
             color="primary"
             variant="contained"
             onClick={handleSubmit}
-            disabled={!validateForm()}
+            // disabled={!validateForm()}
           >
             Create User
           </Button>
