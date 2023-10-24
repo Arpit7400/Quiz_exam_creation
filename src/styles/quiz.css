@@ -460,6 +460,18 @@ button.btnt{
     padding-left: 28px;
 }
 
+
+
+
+/* add subject modal css */
+.image-upload{
+    opacity:0;
+    position: absolute;
+    right: 0;
+    font-size: 4px;
+    rotate: 90deg;
+}
+
 /* responsive css */
 @media screen and (max-width: 1200px) {
     .menu-container {

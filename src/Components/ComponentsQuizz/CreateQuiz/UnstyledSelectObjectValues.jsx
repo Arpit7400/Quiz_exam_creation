@@ -110,8 +110,16 @@ export default function UnstyledSelectObjectValues({dropdownName,listArray,add,v
     
     <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Add New {dropdownName}</DialogTitle>
+          <form onSubmit={(e)=>{
+            e.preventDefault()
+            handleAdd()
+            submithandler()
+          }} 
+          style={{position:'relative'}}
+          >
         <DialogContent sx={{display:'flex', justifyContent:'center'}}>
           <TextField
+            required
             name={(dropdownName == "Subject")?'name':(dropdownName =="Topic")?'topic':(dropdownName == 'Sub topic')?'subt1':null}
             type="text"
             label={`Enter New ${dropdownName}`}
@@ -121,14 +129,16 @@ export default function UnstyledSelectObjectValues({dropdownName,listArray,add,v
           />
           {(dropdownName == "Subject"|| dropdownName =="Topic"|| dropdownName=="Sub topic")?
           <Box>
+          <label name='image' htmlFor="topic-image-upload">
           <input
+            required
             type="file"
+            name='image'
             accept="image/*"
             onChange={(e) => handleImageUpload(e, null, 'topic')}
-            style={{ display: 'none' }}
+            className='image-upload'
             id="topic-image-upload"
             />
-            <label htmlFor="topic-image-upload">
             <IconButton component="span" aria-label="Upload image">
                 <AddPhotoAlternateIcon sx={{fontSize:'30px'}} />
             </IconButton>
@@ -136,19 +146,17 @@ export default function UnstyledSelectObjectValues({dropdownName,listArray,add,v
 
           </Box>
             :null}
+            
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={()=>{
-            handleAdd()
-            submithandler()
-          
-          }} color="primary">
+          <Button type='submit' color="primary">
             Add
           </Button>
         </DialogActions>
+        </form>
       </Dialog>
       </div>
     

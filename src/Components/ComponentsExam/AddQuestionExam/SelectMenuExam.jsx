@@ -122,8 +122,16 @@ export default function SelectMenuExam({dropdownName,listArray,add,value,val }) 
     </CustomSelect>
     <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Add New {dropdownName}</DialogTitle>
+        <form
+        onSubmit={(e)=>{
+          handleAdd()
+          submithandler()
+        }}
+        style={{position:'relative'}}
+        >
         <DialogContent sx={{display:'flex', justifyContent:'center'}}>
           <TextField
+          required
             type="text"
             label={`Enter New ${dropdownName}`}
             value={sub}
@@ -132,14 +140,15 @@ export default function SelectMenuExam({dropdownName,listArray,add,value,val }) 
           />
           {(dropdownName == "Subject"|| dropdownName =="Topic"|| dropdownName=="Sub topic")?
           <Box>
+            <label htmlFor="topic-image-upload">
           <input
+            required
             type="file"
             accept="image/*"
             onChange={(e) => handleImageUpload(e, null, 'topic')}
-            style={{ display: 'none' }}
             id="topic-image-upload"
+            className='image-upload'
             />
-            <label htmlFor="topic-image-upload">
             <IconButton component="span" aria-label="Upload image">
                 <AddPhotoAlternateIcon sx={{fontSize:'30px'}} />
             </IconButton>
@@ -152,13 +161,11 @@ export default function SelectMenuExam({dropdownName,listArray,add,value,val }) 
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={()=>{
-            handleAdd()
-            submithandler()
-          }} color="primary">
+          <Button type='submit'  color="primary">
             Add
           </Button>
         </DialogActions>
+        </form>
       </Dialog>
       </div>
     
