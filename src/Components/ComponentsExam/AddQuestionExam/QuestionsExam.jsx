@@ -47,17 +47,17 @@ const QuestionsExam = (props) => {
   };
 
   const handleRadioChange = (event, index) => {
-    // const selectedIndex = parseInt(event.target.value, 10);
+    const selectedIndex = parseInt(event.target.value, 10);
     
-    // // Create a new array with updated answer values
-    // const newOptions = options.map((option, index) => ({
-    //     ...option,
-    //     answer: index === selectedIndex,
-    // }));
+    // Create a new array with updated answer values
+    const newOptions = options.map((option, index) => ({
+        ...option,
+        answer: index === selectedIndex,
+    }));
 
-    // setOptions(newOptions);
+    setOptions(newOptions);
     setCorrectAnswerIndex(index);
-    console.log(correctAnswerIndex)
+    // console.log(correctAnswerIndex)
 };
 
   const handleDeleteImage = (type) => {
@@ -107,11 +107,13 @@ const QuestionsExam = (props) => {
     if(!exam.Quiz_Type){
       enqueueSnackbar('Select Question Type', { variant: 'error' })
     }else{
+    let answer = ''
+    options.map(option=>option.answer? answer = option.text:"")
     const formData = new FormData();
     formData.append('question_type', exam.Quiz_Type);
     formData.append('question_text', question.text);
     formData.append('question_image', question.image);
-    formData.append('answer', correctAnswerIndex);
+    formData.append('answer', answer);
     for (let i = 0; i < options.length; i++) {
       const optionText = options[i].text;
       const optionImageInput = options[i].image;

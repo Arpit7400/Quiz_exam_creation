@@ -37,12 +37,12 @@ const QuestionTrueFalseExam = (props) => {
   };
 
   const handleRadioChange = (selectedIndex) => {
-    // const newOptions = options.map((option, index) => ({
-    //   ...option,
-    //   answer: index === selectedIndex,
-    // }));
+    const newOptions = options.map((option, index) => ({
+      ...option,
+      answer: index === selectedIndex,
+    }));
   
-    // setOptions(newOptions);
+    setOptions(newOptions);
     setSelectedAnswer(selectedIndex);
   };
 
@@ -72,12 +72,13 @@ const QuestionTrueFalseExam = (props) => {
 
   const handlePostQuestion = () => {
     // const data = {selectedAnswer
-    
+    let answer = ''
+    options.map(option=>option.answer? answer = option.text:"")
     const formData = new FormData();
     formData.append('question_type', exam.Quiz_Type);
       formData.append('question_text', question.text);
       formData.append('question_image', question.image);
-      formData.append('answer', selectedAnswer+1);
+      formData.append('answer', answer);
 
       for (let i = 0; i < options.length; i++) {
         const optionText = options[i].text;

@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   TextField,
   Radio,
@@ -11,14 +11,13 @@ import {
 } from '@mui/material';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
-import ClearIcon from '@mui/icons-material/Clear';
 import { State } from "../../Context/Provider"
 import axios from 'axios';
 import { qStyle } from '../../../styles/style';
 import { useSnackbar } from 'notistack';
 
 const CreateQuiz = () => {
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar} = useSnackbar();
   const { quest,questions, setQuestions,link} = State();
   const [question, setQuestion] = useState({ text: '', image: null });
   const [options, setOptions] = useState([
@@ -90,20 +89,28 @@ const CreateQuiz = () => {
       setOptions(newOptions);
     }
   };
-
+  
   const handlePostQuestion = () => {
     const formData = new FormData();
     if (!quest.Language || !quest.Class || !quest.Subject || !quest.Topic|| !quest.Sub_topic||!quest.Level|| !quest.Quiz_Type  ) {
       enqueueSnackbar('Please select all dropdown', { variant: 'error' })
     }
     else {
+      let quizType = quest.Quiz_Type
+      if(quizType.includes("multiple")){
+        quizType = 'multiple'
+      }else if(quizType.includes('Single')){
+        quizType = 'single'
+      }else if(quizType.includes(' or ')){
+        quizType = 'truefalse'
+      }
       formData.append('language', quest.Language);
       formData.append('class', quest.Class);
       formData.append('subject', quest.Subject);
       formData.append('topic', quest.Topic);
       formData.append('subtopic', quest.Sub_topic);
       formData.append('level', quest.Level);
-      formData.append('quiz_type', quest.Quiz_Type);
+      formData.append('quiz_type', quizType);
       formData.append('question', question.text);
       formData.append('question_image', question.image);
       formData.append('explanation', explanation);

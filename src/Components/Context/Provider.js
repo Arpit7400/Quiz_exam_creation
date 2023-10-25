@@ -1,5 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
-import axios from 'axios'
+import React, { createContext, useContext, useState } from "react";
 import Hamburger from 'hamburger-react';
 
 const ChatContext = createContext();
@@ -57,7 +56,6 @@ const Provider = ({ children }) => {
   const [questions, setQuestions] = useState([])
   const [Exams, SetExams]=useState([])
   const [subjects, setSubjects] = useState([])
-  const [fdata, setfdata] = useState([])
   const [desubject, setdesubject] = useState([])
   const [destopic, setedstopic] = useState([])
   const [editid, seteditid] = useState({})

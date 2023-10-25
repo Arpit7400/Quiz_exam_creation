@@ -21,7 +21,7 @@ const CreateQuiz = () => {
   const navigate = useNavigate()
   const {quiz_id} = useParams()
   
-  const { quest,questions,setquest, setQuestions, link} = State();
+  const { quest,setquest, link} = State();
   const [question, setQuestion] = useState({ text: '', question_image_url: null });
   const [options, setOptions] = useState([
     { text: '', image_url: null ,is_answer: false},
@@ -29,7 +29,6 @@ const CreateQuiz = () => {
     { text: '', image_url: null ,is_answer: false},
     { text: '', image_url: null ,is_answer: false},
   ]);
-  const [bool, setbool]=useState(true)
   const [correctAnswerIndex, setCorrectAnswerIndex] = useState(null);
   const [explanation, setExplanation] = useState('')
 
@@ -124,7 +123,14 @@ const CreateQuiz = () => {
       enqueueSnackbar('Please select all dropdown', { variant: 'error' })
     }
     else {
-    
+      let quizType = quest.Quiz_Type
+      if(quizType.includes("multiple")){
+        quizType = 'multiple'
+      }else if(quizType.includes('Single')){
+        quizType = 'single'
+      }else{
+        quizType = 'truefalse'
+      }
     const formData = new FormData();
     formData.append('language', quest.Language);
     formData.append('class', quest.Class);
@@ -132,7 +138,7 @@ const CreateQuiz = () => {
     formData.append('topic', quest.Topic);
     formData.append('subtopic',  quest.Sub_topic);
     formData.append('level', quest.Level);
-    formData.append('quiz_type',  quest.Quiz_Type);
+    formData.append('quiz_type',  quizType);
     formData.append('question', question.text);
     formData.append('question_image', question.question_image_url);
     formData.append('explanation', explanation)

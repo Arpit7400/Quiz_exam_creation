@@ -123,6 +123,14 @@ const QuestionMultipleAnsUpdate = ({handleThreeDotMenu}) => {
     if (!quest.Language || !quest.Class || !quest.Subject || !quest.Topic|| !quest.Sub_topic||!quest.Level|| !quest.Quiz_Type  ) {
       enqueueSnackbar('Please select all dropdown', { variant: 'error' })
     }else{
+      let quizType = quest.Quiz_Type
+      if(quizType.includes("multiple")){
+        quizType = 'multiple'
+      }else if(quizType.includes('Single')){
+        quizType = 'single'
+      }else{
+        quizType = 'truefalse'
+      }
     const formData = new FormData();
     formData.append('language', quest.Language);
     formData.append('class', quest.Class);
@@ -130,7 +138,7 @@ const QuestionMultipleAnsUpdate = ({handleThreeDotMenu}) => {
     formData.append('topic', quest.Topic);
     formData.append('subtopic',  quest.Sub_topic);
     formData.append('level', quest.Level);
-    formData.append('quiz_type',  quest.Quiz_Type);
+    formData.append('quiz_type',  quizType);
     formData.append('question', question.text);
     formData.append('question_image', question.question_image_url);
 
