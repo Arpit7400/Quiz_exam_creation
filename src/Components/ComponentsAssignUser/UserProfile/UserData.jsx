@@ -1,26 +1,43 @@
 import { Image } from '@mui/icons-material'
 import { Avatar, Box, LinearProgress, Typography } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import userImg from './userImg.png'
 import MailOutlinedIcon from '@mui/icons-material/MailOutlined';
 import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import { sideDetail } from '../../../styles/style';
+import { State } from '../../Context/Provider';
+import axios from 'axios';
 
-const UserData = () => {
+const UserData = ({userId}) => {
+  const {link} = State()
+  const [userData, setUserData] = useState()
+  const address = userData?.address
+  useEffect(() => {
+    const fetchUserData = async ()=>{
+      
+    }
+    axios.get(`${link}/user/${userId}`).then(
+    (response) => {
+      setUserData(response.data);
+    }
+  ).catch((error) => {
+      console.error(error);
+    });
+  }, []);
   return (
-    <Box>
-        <Box sx={{ mb:'35px', textAlign:'-webkit-center' }}>
-          <Avatar src={userImg} 
-            alt="User Image"
+    <Box sx={sideDetail.second} >
+        <Box style={{ marginBottom:'35px', textAlign:'-webkit-center' }} >
+          
+          <Avatar 
+            src={userData?.image? `${link}/get_image/${userData?.image}`:""} 
             style={{
             width: "300px",
             height: "300px",
             borderRadius:'16px',
-            backgroundColor: '#fff',
           }}
           />
-          <Typography sx={{pt:'25px', font:'500 24px Poppins'}}>User Name</Typography>
+          <Typography sx={{pt:'25px', font:'500 24px Poppins'}}>{userData?.name}</Typography>
         </Box>
 
         <Box sx={{ display:'flex',alignItems:'center', flexDirection:'column', pb:'39px', borderBottom:'2px solid #707070'}}>
@@ -67,7 +84,7 @@ const UserData = () => {
             </Box>
             <Box sx={{textAlign:'start'}}>
               <Typography sx={{font:'500 14px Poppins', color:'#707070', mb:'8px'}}>Email</Typography>
-              <Typography sx={{font:'500 20px Poppins'}}>user@example.com</Typography>
+              <Typography sx={{font:'500 20px Poppins'}}>{userData?.email? userData.email:'Not Updated'}</Typography>
             </Box>
           </Box>
           <Box sx={{display:'flex', alignItems:'center', justifyContent:'start', gap:'24px', pb:'30px'}}>
@@ -76,7 +93,7 @@ const UserData = () => {
             </Box>
             <Box sx={{textAlign:'start'}}>
               <Typography sx={{font:'500 14px Poppins', color:'#707070', mb:'8px'}}>Phone</Typography>
-              <Typography sx={{font:'500 20px Poppins'}}>+91 7878787878</Typography>
+              <Typography sx={{font:'500 20px Poppins'}}>{userData?.phone? "+91 "+userData.phone:'Not Updated'}</Typography>
             </Box>
           </Box>
           <Box sx={{display:'flex', alignItems:'center', justifyContent:'start', gap:'24px', pb:'30px'}}>
@@ -84,8 +101,12 @@ const UserData = () => {
                 <LocationOnOutlinedIcon />
             </Box>
             <Box sx={{textAlign:'start'}}>
-              <Typography sx={{font:'500 14px Poppins', color:'#707070', mb:'8px'}}>Gurgaon, Hariyana-545454</Typography>
-              <Typography sx={{font:'500 20px Poppins'}}>user@example.com</Typography>
+              <Typography sx={{font:'500 14px Poppins', color:'#707070', mb:'8px'}}>Address</Typography>
+              <Typography sx={{font:'500 20px Poppins'}}>
+                {address?.state?
+                `${address?.street}, ${address?.city}, ${address?.state}, ${address?.country}-${address?.pincode}`
+                  : "Not Updated"}
+              </Typography>
             </Box>
           </Box>
         </Box>

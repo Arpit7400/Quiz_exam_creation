@@ -1,5 +1,5 @@
-import { Button, FormControl, Input } from "@mui/material";
-import React, { useState } from "react";
+import { Button, FormControl, FormGroup, Input } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import { btnStyle, inputStyle } from "../../../styles/style";
 import { Box } from "@mui/system";
 import { State } from "../../Context/Provider";
@@ -7,7 +7,7 @@ import axios from "axios";
 
 
 const IDPassword = () => {
-  const {updateUser, setUpdateUser, userData, userImage, link} = State()
+  const {updateUser, setUpdateUser, userData, userImage, link, usersdata} = State()
   const handleInputChange = (e)=>{
     const {name, value} = e.target
     setUpdateUser({...updateUser, [name]:value})
@@ -16,19 +16,18 @@ const IDPassword = () => {
   const handleHave = ()=>{
     var usersdata = JSON.parse(localStorage.getItem('user' )) ;
     const userId = usersdata.user.user_id
-    console.log(userId)
 
     const formData = new FormData();
 
     formData.append('password', updateUser.oldPassword);
     formData.append('new-password', updateUser.newPassword);
-    formData.append('email', userData.email);
-    formData.append('phone', userData.phoneno);
-    formData.append('street', userData.address);
-    formData.append('country', userData.country);
-    formData.append('city', userData.city);
-    formData.append('state', userData.state);
-    formData.append('pincode', userData.pincode);
+    // formData.append('email', userData.email);
+    // formData.append('phone', userData.phoneno);
+    // formData.append('street', userData.address);
+    // formData.append('country', userData.country);
+    // formData.append('city', userData.city);
+    // formData.append('state', userData.state);
+    // formData.append('pincode', userData.pincode);
     formData.append('user_image', userImage);
     // console.log(updateUser)
     // console.log(userImage)
@@ -41,6 +40,7 @@ const IDPassword = () => {
           if (response.status === 200) {
             // setbool(!bool)
             console.log("Data updated successfully");
+             
             
           } else {
             alert("Error occured");
@@ -51,14 +51,28 @@ const IDPassword = () => {
         });
     
   }
+  useEffect(()=>{
+    const fetchId =  async ()=>{
+      const userID = await usersdata.user._id
+     const {data} = await axios.get(`${link}/user/${userID}`)
+     setUpdateUser({
+        ...updateUser, userId:data.user_id,
+      })
+    } 
+    fetchId()
+  }, [])
   return (
-    <>
+    <form onSubmit={(e)=>{
+      e.preventDefault()
+      handleHave()
+    }}>
     <Box 
     sx={{
             display:'grid', gridGap:'20px', 
             }}>
       <Input
       name="userId"
+      disabled
       required
         disableUnderline
         placeholder="User ID"
@@ -71,6 +85,7 @@ const IDPassword = () => {
         }}
       />
       <Input
+      required
       type="password"
       name="oldPassword"
         disableUnderline
@@ -84,6 +99,7 @@ const IDPassword = () => {
         }}
       />
       <Input
+      required
       type="password"
       name="newPassword"
         disableUnderline
@@ -98,9 +114,9 @@ const IDPassword = () => {
       />
     </Box>
     <Box textAlign={'end'}>
-        <Button type="submit" onClick={handleHave} sx={{width:'50%', mt:'25px',}} style={btnStyle}>Save</Button>
+        <Button type="submit" sx={{width:'50%', mt:'25px',}} style={btnStyle}>Save</Button>
     </Box>
-    </>
+    </form>
   );
 };
 

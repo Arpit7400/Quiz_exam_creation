@@ -35,10 +35,7 @@ const ProfileWrapper = ({pageName}) => {
             <CircleNotificationsIcon sx={{fontSize:'32px', color:'#4F78FE'}} />
         </Box>
 
-        <Box 
-            onClick={()=>{
-            }}
-        >
+        <Box >
             <AccountMenu />
         </Box>
         <Box onClick={handleHamburger} sx={{

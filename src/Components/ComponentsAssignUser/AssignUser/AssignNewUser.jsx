@@ -4,6 +4,7 @@ import DropDown from './DropDown'
 import SelectMenuAssign from './SelectMenuAssign'
 import { State } from '../../Context/Provider'
 import axios from 'axios'
+import { btn } from '../../../styles/style'
 const AssignNewUser = () => {
   const { assign,dasubject, setdasubject,
         datopic, setdatopic,
@@ -144,22 +145,7 @@ const AssignNewUser = () => {
         <Box>
         <Button
           onClick={handleAssign}
-          sx={{
-            width: "375px",
-            height:'75px',
-            borderRadius: "12px",
-            background: "#7A58E6",
-            cursor: "pointer",
-            border: "none",
-            color: "#FFF",
-            fontSize: "24px",
-            fontWeight: "500",
-            textTransform: "capitalize",
-            p: "10px 10px",
-            "&:hover": {
-              background: "#7A58E6",
-            },
-          }}
+          sx={btn.primary}
           >Assign User</Button>
         </Box>
 

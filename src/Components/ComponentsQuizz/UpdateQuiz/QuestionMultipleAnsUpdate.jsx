@@ -15,7 +15,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import { State } from "../../Context/Provider"
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-import { qStyle } from '../../../styles/style';
+import { btn, qStyle } from '../../../styles/style';
 import { enqueueSnackbar } from 'notistack';
 
 const QuestionMultipleAnsUpdate = ({handleThreeDotMenu}) => {
@@ -366,21 +366,7 @@ const QuestionMultipleAnsUpdate = ({handleThreeDotMenu}) => {
         navigate('/admin')
       }} 
         color="primary"
-        sx={{
-            width: "40%",
-            borderRadius: "12px",
-            background: "#7A58E6",
-            cursor: "pointer",
-            border: "none",
-            color: "#FFF",
-            fontSize: "18px",
-            fontWeight: "500",
-            textTransform: "capitalize",
-            p: "10px 10px",
-            "&:hover": {
-              background: "#7A58E6",
-            },
-          }}
+        sx={btn.primary}
       >
         Delete Question
       </Button>

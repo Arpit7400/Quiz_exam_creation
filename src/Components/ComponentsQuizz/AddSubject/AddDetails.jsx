@@ -78,7 +78,7 @@ const AddDetails = () => {
   }
 
   return (
-    <Box className="side-details page2">
+    <Box sx={sideDetail.second} style={{minHeight:'70vh'}} className="side-details page2">
       <h3>Create subject/topic/subtopic</h3>
 
       <div className="dropdown dropdown-defult" style={{marginBottom:'10px'}}>

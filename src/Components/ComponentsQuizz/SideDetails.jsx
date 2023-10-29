@@ -53,7 +53,7 @@ const SideDetails = ({heading, number}) => {
   }, [quest.Subject,quest.Topic,quest.Sub_topic,quest.Level,quest.Class,quest.Quiz_Type,quest.Language,openPage,bool])
   return (
     
-    <Box  className="side-details">
+    <Box sx={sideDetail.second}  className="side-details">
       <div className="amount-wrapper">
         <p className="price-heading">{heading}</p>
         <p className="price-count">{questions.length}</p>

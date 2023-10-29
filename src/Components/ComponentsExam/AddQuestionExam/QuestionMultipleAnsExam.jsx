@@ -14,7 +14,7 @@ import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import ClearIcon from '@mui/icons-material/Clear';
 import { State } from "../../Context/Provider"
 import axios from 'axios';
-import { qStyle } from '../../../styles/style';
+import { btn, qStyle } from '../../../styles/style';
 import { enqueueSnackbar } from 'notistack';
 
 const QuestionMultipleAnsExam = (props) => {
@@ -188,6 +188,7 @@ const QuestionMultipleAnsExam = (props) => {
     border: 'none',
     color: '#707070',
     fontSize: '18px',
+    outline:'none'
   };
   const required = (e,i)=>{
     // const {name, validity} = e.target
@@ -320,23 +321,9 @@ const QuestionMultipleAnsExam = (props) => {
 
       }} 
       type='submit'
-        color="primary"
-        disabled={!examid.id}
-        sx={{
-            width: "375px",
-            borderRadius: "12px",
-            background: "#7A58E6",
-            cursor: "pointer",
-            border: "none",
-            color: "#FFF",
-            fontSize: "18px",
-            fontWeight: "500",
-            textTransform: "capitalize",
-            p: "10px 10px",
-            "&:hover": {
-              background: "#7A58E6",
-            },
-          }}
+        color="primary" 
+        disabled={!examid.id && !editid.id}
+        sx={btn.primary}
       >
         ADD Question
       </Button>

@@ -13,7 +13,7 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import { State } from '../../Context/Provider';
 import axios from 'axios';
-import { qStyle } from '../../../styles/style';
+import { btn, qStyle } from '../../../styles/style';
 import { enqueueSnackbar } from 'notistack';
 
 const QuestionTrueFalse = ({ handleThreeDotMenu, prop  }) => {
@@ -244,21 +244,7 @@ const QuestionTrueFalse = ({ handleThreeDotMenu, prop  }) => {
         <Button
           color="primary"
           type='submit'
-          sx={{
-              width: "375px",
-              borderRadius: "12px",
-              background: "#7A58E6",
-              cursor: "pointer",
-              border: "none",
-              color: "#FFF",
-              fontSize: "18px",
-              fontWeight: "500",
-              textTransform: "capitalize",
-              p: "10px 10px",
-              "&:hover": {
-                background: "#7A58E6",
-              },
-            }}
+          sx={btn.primary}
         >
           Post Question
         </Button>

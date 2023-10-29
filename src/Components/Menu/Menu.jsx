@@ -12,8 +12,8 @@ import DescriptionIcon from '@mui/icons-material/Description';
 const Menu = () => {
   
   const navigate = useNavigate();
-  const {setActiveTab, openPage, toggleMenu, handleHamburger } = State();
-
+  const {setActiveTab, openPage, toggleMenu, handleHamburger,assignedUser } = State();
+  let usersdata = JSON?.parse(localStorage?.getItem('user'));
 
 
   const handleTabClick = (tab) => {
@@ -98,7 +98,9 @@ const Menu = () => {
             
             <p>Exam</p>
           </li>
-
+            {assignedUser.role === 'admin' || usersdata.user.role ==='admin'?
+            <>
+           
           <li className={`tab ${openPage === 'Assign User' ? 'active' : ''}`} 
           onClick={() => {
             handleTabClick('tab3')
@@ -118,6 +120,8 @@ const Menu = () => {
             </Link>
           </Box>
           :null}
+           </>
+           :null}
         </List>
       </Box>
     </Box>

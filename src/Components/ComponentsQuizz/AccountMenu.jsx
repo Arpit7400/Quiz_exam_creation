@@ -6,14 +6,15 @@ import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { styleProfile } from '../../styles/style';
+import { State } from '../Context/Provider';
 
 export default function AccountMenu() {
+  const {usersdata} = State()
   const navigate = useNavigate()
   
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -38,7 +39,7 @@ export default function AccountMenu() {
             disableRipple ={true}
             edge={false}
           >
-            <Avatar sx={{ width: 55, height: 55 }}>A</Avatar>
+            <Avatar sx={styleProfile.topIcon}>A</Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -81,7 +82,7 @@ export default function AccountMenu() {
         <MenuItem 
         onClick={()=>{
           handleClose() 
-          navigate('/user/profile')
+          navigate(`/user/${usersdata.user._id}`)
           }}>
           <Avatar /> Profile
         </MenuItem>

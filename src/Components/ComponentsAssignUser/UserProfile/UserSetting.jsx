@@ -1,24 +1,23 @@
 import { Box } from '@mui/system'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 import { mainBoxStyle } from '../../../styles/style'
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
 import ProfileWrapper from '../../ComponentsQuizz/ProfileWrapper';
 import General from './General';
 import IDPassword from './IDPassword';
 import { Avatar, Button, IconButton, Tooltip } from '@mui/material';
-import userImg from '../../../Data/userImg.png'
 import { State } from '../../Context/Provider';
+import axios from 'axios';
 
 
 
 const UserSetting = () => {
     const [value, setValue] = React.useState(0);
     const inputRef = useRef(null)
-    const {userImage, setUserImage} = State()
+    const {userImage, setUserImage, link, usersdata} = State()
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -53,6 +52,33 @@ const UserSetting = () => {
     const image = event.target.files[0]
     setUserImage(image)
   }
+  const handleUploadImage = ()=>{
+
+    const userID = usersdata.user._id
+    axios
+    .put(`${link}/update_user_profile/${userID}`,userImage )
+      .then((response) => {
+        if (response.status === 200) {
+          // setbool(!bool)
+          console.log("Image updated successfully");
+          
+        } else {
+          alert("Error occured");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  useEffect(()=>{
+    const fetchUserImg =  async ()=>{
+      const userID = await usersdata.user._id
+     const {data} = await axios.get(`${link}/user/${userID}`)
+     setUserImage(data.user_image)
+    } 
+    fetchUserImg()
+  }, [])
   return (
     <Box
     // style={style.dflex}
@@ -70,9 +96,13 @@ const UserSetting = () => {
                 <Box sx={{ display:'flex', px:'25px', gap:'20px', alignItems:'center'}}>
                   <Box onClick={handleImageClick}>
                     {userImage?(
-                      <Tooltip title='Click to Change Image'>
+                        <Tooltip title='Click to Change Image'>
+                        {typeof(userImage) === 'object'?
                         <img src={URL.createObjectURL(userImage)} style={{width:'200px', height:'200px', objectFit:'contain'}}></img>
-                    </Tooltip>
+                        :
+                        <img src={`${link}/get_image_user/${userImage}`} style={{width:'200px', height:'200px', objectFit:'contain'}}></img>
+                    }
+                        </Tooltip>
                       
                       ):( 
                         <Tooltip title='Click to Upload Image'>
@@ -95,7 +125,7 @@ const UserSetting = () => {
                 
                 </label> */}
                 <Box sx={{ display:'flex', px:'25px', gap:'20px', alignItems:'center'}}>
-                <Button component="span" aria-label="Upload image" style={{background: "#7A58E6",color: "#FFF",padding:'10px 20px',}} sx={style.btnStyle}>Upload Image</Button>
+                <Button disabled={typeof(userImage)=== 'string'} onClick={handleUploadImage} component="span" aria-label="Upload image" style={{background: "#7A58E6",color: "#FFF",padding:'10px 20px',}} sx={style.btnStyle}>Upload Image</Button>
                 <Button style={{background: "#F5F6F7",color: "#707070",padding:'10px 20px',}} sx={style.btnStyle}>Delete</Button>
 
                 </Box>
@@ -141,7 +171,7 @@ function CustomTabPanel(props) {
       >
         {value === index && (
           <Box sx={{ py: 5 }}>
-            <Typography >{children}</Typography>
+            <Box >{children}</Box>
           </Box>
         )}
       </div>

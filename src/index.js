@@ -6,6 +6,7 @@ import Provider from "./Components/Context/Provider";
 import { SnackbarProvider, closeSnackbar, useSnackbar } from 'notistack';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -19,7 +20,9 @@ root.render(
       
     )}
     >
+      <BrowserRouter>
       <App />
+      </BrowserRouter>
     </SnackbarProvider>
     </React.StrictMode>
   </Provider>

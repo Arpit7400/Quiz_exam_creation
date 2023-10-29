@@ -9,7 +9,7 @@ import SelectContainer from "../CreateQuiz/SelectContainer";
 import { State } from "../../Context/Provider";
 import QuestionMultipleAnsUpdate from "./QuestionMultipleAnsUpdate";
 import QuestionTrueFalseUpdate from "./QuestionTrueFalseUpdate";
-import { mainBoxStyle } from "../../../styles/style";
+import { mainBoxStyle, sideDetail } from "../../../styles/style";
 
 const style = {
   dflex: {
@@ -41,8 +41,9 @@ const UpdateQuiz = () => {
                   width: {
                     xs: "60%",
                     sm: "50%",
-                    mt: "40px" 
+                    md: "50%" 
                   },
+                  mt:'20px'
                 }}>
                 <UnstyledSelectObjectValues
                   dropdownName={"Language"}
@@ -56,12 +57,12 @@ const UpdateQuiz = () => {
                 <Box>
                 {quest.Quiz_Type === "" ? (
                   <Questions  />
-                ) : quest.Quiz_Type === "Multiple choice - multiple answers" ? (
+                ) : quest.Quiz_Type === "multiple" ? (
                   <QuestionMultipleAnsUpdate
                   />
-                ) : quest.Quiz_Type === "True or False" ? (
+                ) : quest.Quiz_Type === "truefalse" ? (
                   <QuestionTrueFalseUpdate prop={["True", "False"]} />
-                ) : quest.Quiz_Type === "Multiple choice - Single answer" ? (
+                ) : quest.Quiz_Type === "single" ? (
                   <Questions />
                 ) : quest.Quiz_Type === "Yes or No" ? (
                   <QuestionTrueFalseUpdate
@@ -75,14 +76,7 @@ const UpdateQuiz = () => {
       </Box>
 
       <Box
-        sx={{
-          width: {
-            md: "37%",
-            lg: "31%",
-          },
-          background: "#fff",
-          p: "38px 32px",
-        }}
+        sx={sideDetail.first}
       >
      
       <AddDetails />

@@ -38,12 +38,12 @@ const CreateQuiz = ({
                 <SelectContainer />
                 {quest.Quiz_Type === "" ? (
                   <Questions  />
-                ) : quest.Quiz_Type === "Multiple choice - multiple answers" ? (
+                ) : quest.Quiz_Type === "multiple" ? (
                   <QuestionMultipleAns
                   />
-                ) : quest.Quiz_Type === "True or False" ? (
+                ) : quest.Quiz_Type === "truefalse" ? (
                   <QuestionTrueFalse prop={["True", "False"]} />
-                ) : quest.Quiz_Type === "Multiple choice - Single answer" ? (
+                ) : quest.Quiz_Type === "single" ? (
                   <Questions />
                 ) : quest.Quiz_Type === "Yes or No" ? (
                   <QuestionTrueFalse

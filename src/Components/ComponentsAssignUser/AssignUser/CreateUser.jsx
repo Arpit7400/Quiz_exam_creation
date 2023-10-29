@@ -13,7 +13,7 @@ import {
 
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { inputStyle, mainBoxStyle, selectStyle } from '../../../styles/style';
+import { btn, inputStyle, mainBoxStyle, selectStyle } from '../../../styles/style';
 import axios from 'axios';
 import { State } from '../../Context/Provider'
 
@@ -259,22 +259,7 @@ sx={{
         <Box >
           <Button
           type='submit'
-          sx={{
-            mt:'20px',
-            width: "375px",
-            borderRadius: "12px",
-            background: "#7A58E6",
-            cursor: "pointer",
-            border: "none",
-            color: "#FFF",
-            fontSize: "18px",
-            fontWeight: "500",
-            textTransform: "capitalize",
-            p: "10px 10px",
-            "&:hover": {
-              background: "#7A58E6",
-            },
-          }}
+          sx={btn.primary}
             color="primary"
             variant="contained"
             onClick={handleSubmit}

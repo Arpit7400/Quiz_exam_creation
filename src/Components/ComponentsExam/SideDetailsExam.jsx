@@ -33,7 +33,7 @@ const SideDetailsExam = ({heading}) => {
   }
   
   return (
-    <div sx={sideDetail.second} className="side-details">
+    <Box sx={sideDetail.second} className="side-details">
       <div className="amount-wrapper">
         <p className="price-heading">{heading}</p>
         <p className="price-count">{Exams.length}</p>
@@ -82,7 +82,7 @@ const SideDetailsExam = ({heading}) => {
     </Box>
     </Box>
 
-</div>
+</Box>
   )
 }
 

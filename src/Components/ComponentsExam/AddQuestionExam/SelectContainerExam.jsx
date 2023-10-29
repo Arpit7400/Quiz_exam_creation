@@ -7,7 +7,7 @@ import axios from 'axios'
 
 const SelectContainerExam = () => {
   const { exam,  desubject, destopic,setdesubject,setedstopic,setdlanguage,link} = State();
-  const [classs,setclasss]=useState(["1", "2", "3", "4", "5", "6", "7", "8", "9","10","11","12"])
+  const [classs,setclasss]=useState([ "1", "2", "3", "4", "5", "6", "7", "8", "9","10","11","12", "Student", "Learner"])
   useEffect(() => {
     var usersdata = JSON.parse(localStorage.getItem('user' )) ;
     const role = usersdata.user.role
@@ -82,7 +82,7 @@ const SelectContainerExam = () => {
         <SelectMenuExam dropdownName={"Class"} listArray={classs} classList={"classChange"} add={false} value={"Class"} val={exam.Class} />
         <SelectMenuExam dropdownName={"Subject"} listArray={desubject} add={true} value={"Subject"} val={exam.Subject}/>
         <SelectMenuExam dropdownName={"Topic"} listArray={destopic} add={true} value={"Topic"} val={exam.Topic}/>
-        <SelectMenuExam dropdownName={"Level"} listArray={["Beginner", "Intermediate" , "Advance"]} add={false} value={"Level"} val={exam.Level}/>
+        <SelectMenuExam dropdownName={"Level"} listArray={["Beginner", "Intermediate" , "Advance", "Any One"]} add={false} value={"Level"} val={exam.Level}/>
         <SelectMenuExam dropdownName={"Per Question Time"} listArray={['1 Munute', '2 Minutes', '3 Minutes']} value={"perquest"} val={exam.perquest}/>
         <SelectMenuExam dropdownName={"Test Duration"} listArray={['60 Minutes', '120 Minutes', '180 Minutes']} value={"assigned_time"} val={exam.assigned_time}/>
 

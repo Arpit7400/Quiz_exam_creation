@@ -18,11 +18,25 @@ import UserSetting from "./Components/ComponentsAssignUser/UserProfile/UserSetti
 import AssignNewUser from "./Components/ComponentsAssignUser/AssignUser/AssignNewUser";
 import CreateUser from "./Components/ComponentsAssignUser/AssignUser/CreateUser";
 import UserProfile from "./Components/ComponentsAssignUser/UserProfile/UserProfile";
+import { State } from "./Components/Context/Provider";
+import axios from "axios";
+import { useEffect } from "react";
+
 
 function App() {
+
+  const {link, usersdata,assignedUser, setAssignedUser} = State()
+  // useEffect(() => {
+  //   const fetchUser = async ()=>{
+  //     let usersdata = await JSON?.parse(localStorage?.getItem('user'));
+  //     const userID = usersdata.user._id
+  //     const {data} = await axios.get(`${link}/user/${userID}`)
+  //     setAssignedUser(data)
+  //   }
+  // fetchUser()
+  // }, []);
   return (
     <div className="App">
-      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/login" element={<Login />} />
@@ -46,7 +60,6 @@ function App() {
             <Route path='setting' element={<UserSetting />} />
           </Route>
         </Routes>
-      </BrowserRouter>
     </div>
   );
 }

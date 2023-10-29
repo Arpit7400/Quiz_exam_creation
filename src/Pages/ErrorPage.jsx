@@ -12,7 +12,7 @@ const ErrorPage = () => {
         The page you are looking for does not exist.
       </Typography>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Button component={Link} to="/admin" variant="contained" color="primary">
+        <Button component={Link} to="/" variant="contained" color="primary">
           Go to Home
         </Button>
       </div>

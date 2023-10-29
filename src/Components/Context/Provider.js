@@ -49,7 +49,7 @@ const Provider = ({ children }) => {
   const [editexam, seteditexam] = useState([]);
 
   const [examid, setexamid] = useState({id:null, qno:1});
-  const link="http://34.131.15.235"
+  const link="http://localhost:5000"
   const [dsubject, setdsubject] = useState([])
   const [dtopic, setdtopic] = useState([])
   const [dlanguage, setdlanguage] = useState([])
@@ -95,7 +95,8 @@ const Provider = ({ children }) => {
   const [userImage, setUserImage] = useState('')
     
  
-  
+  const [assignedUser, setAssignedUser] = useState({})
+  let usersdata = JSON?.parse(localStorage?.getItem('user'));
 
   return (
     <ChatContext.Provider
@@ -140,7 +141,8 @@ const Provider = ({ children }) => {
          updateUser, setUpdateUser,
         userImage, setUserImage,
         btn, setbtn,
-         link
+         link,
+         usersdata,assignedUser, setAssignedUser
       }}
     >
       {children}

@@ -1,5 +1,5 @@
 import { Button, FormControl, Input } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { btnStyle, inputStyle } from "../../../styles/style";
 import { Box } from "@mui/system";
 import { State } from "../../Context/Provider";
@@ -7,7 +7,7 @@ import axios from "axios";
 
 
 const General = () => {
-  const{userData, setUserData, updateUser, userImage, link} = State()
+  const{userData, setUserData, updateUser, userImage, link, usersdata} = State()
     const handleInputChange = (e)=>{
     const {name, value} = e.target
     setUserData({...userData, [name]: value} )
@@ -15,12 +15,11 @@ const General = () => {
   const handleSave = ()=>{
     var usersdata = JSON.parse(localStorage.getItem('user' )) ;
     const userId = usersdata.user.user_id
-    console.log(userId)
 
     const formData = new FormData();
 
-    formData.append('password', updateUser.oldPassword);
-    formData.append('new-password', updateUser.newPassword);
+    // formData.append('password', updateUser.oldPassword);
+    // formData.append('new-password', updateUser.newPassword);
     formData.append('email', userData.email);
     formData.append('phone', userData.phoneno);
     formData.append('street', userData.street);
@@ -28,7 +27,7 @@ const General = () => {
     formData.append('city', userData.city);
     formData.append('state', userData.state);
     formData.append('pincode', userData.pincode);
-    formData.append('user_image', userImage);
+    // formData.append('user_image', userImage);
 
     axios
     .put(`${link}/update_user_profile/${userId}`, formData)
@@ -46,13 +45,36 @@ const General = () => {
         });
     
   }
+  useEffect(()=>{
+    const fetchUser =  async ()=>{
+      const userID = await usersdata.user._id
+     const {data} = await axios.get(`${link}/user/${userID}`)
+      setUserData({
+        name:data.name,
+        email:data.email,
+        phoneno:data.phone,
+        street:data.address.street,
+        country:data.address.country,
+        state:data.address.state,
+        city:data.address.city,
+        pincode:data.address.pincode,
+      })
+    } 
+    fetchUser()
+  }, [])
   return (
-    <>
+    <form
+    onSubmit={(e)=>{
+      e.preventDefault()
+      handleSave()
+    }}
+    >
     <Box 
     sx={{
             display:'grid', gridTemplateColumns:'6fr 6fr', gridGap:'20px', 
             }}>
       <Input
+      disabled
       name="name"
       required
         disableUnderline ={true}
@@ -68,6 +90,7 @@ const General = () => {
       />
       <Input
       name="email"
+      required
         disableUnderline ={true}
         placeholder="email"
         multiline
@@ -81,6 +104,7 @@ const General = () => {
       />
       <Input
       name="phoneno"
+      required
         disableUnderline ={true}
         placeholder="Phone no."
         multiline
@@ -94,6 +118,7 @@ const General = () => {
       />
       <Input
         name="street"
+        required
         disableUnderline ={true}
         placeholder="Address"
         multiline
@@ -107,6 +132,7 @@ const General = () => {
       />
       <Input
       name="country"
+      required
         disableUnderline ={true}
         placeholder="Country"
         multiline
@@ -120,6 +146,7 @@ const General = () => {
       />
       <Input
       name="state"
+      required
          disableUnderline ={true}
          placeholder="State"
          multiline
@@ -133,6 +160,7 @@ const General = () => {
       />
       <Input
       name='city'
+      required
        disableUnderline ={true}
        placeholder="City"
        multiline
@@ -146,6 +174,7 @@ const General = () => {
       />
       <Input
       name="pincode"
+      required
        disableUnderline ={true}
        placeholder="Pincode"
        multiline
@@ -159,9 +188,9 @@ const General = () => {
       />
     </Box>
     <Box textAlign={'end'}>
-        <Button type="submit" onClick={handleSave} sx={{width:'50%', mt:'25px',}} style={btnStyle}>Save</Button>
+        <Button type="submit" sx={{width:'50%', mt:'25px',}} style={btnStyle}>Save</Button>
     </Box>
-    </>
+    </form>
   );
 };
 

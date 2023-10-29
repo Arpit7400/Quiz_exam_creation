@@ -4,6 +4,7 @@ import axios from 'axios'
 import AddNewUser from './AddNewUser'
 import UserList from './UserList'
 import { State } from '../../Context/Provider'
+import { sideDetail } from '../../../styles/style'
 
 const TotalUser = () => {
     // const [user, setUser] = useState([])
@@ -26,8 +27,8 @@ const TotalUser = () => {
   }, []);
     
   return (
-    <Box >
-      <Box sx={{m:'0px 12px 32px 12px'}} className="amount-wrapper">
+    <Box sx={sideDetail.second} >
+      <Box sx={{mb:'32px'}} className="amount-wrapper">
         <p className="price-heading">Total Users</p>
         <p className="price-count">{user.length}</p>
       </Box>

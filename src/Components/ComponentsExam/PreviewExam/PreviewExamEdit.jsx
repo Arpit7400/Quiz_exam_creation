@@ -147,7 +147,7 @@ const PreviewExamEdit = ({ open, setOpen,handleOpen,data}) => {
                     color="primary"
                   >
                     <ClearIcon />
-                  </IconButton>
+                  </IconButton> 
             </DialogActions>
 
         </Box>

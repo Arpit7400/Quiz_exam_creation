@@ -6,13 +6,14 @@ import { mainBoxStyle, sideDetail } from '../../../styles/style'
 import UserData from './UserData'
 import UserSetting from './UserSetting'
 import { Outlet, useParams } from 'react-router-dom'
+import { State } from '../../Context/Provider'
 
 
 
 const UserProfile = () => {
   const {userId} = useParams()
-  console.log(userId)
-  
+  const {usersdata} = State()
+  const userid = usersdata.user._id
   const style = {
     dflex: {
       display: "flex",
@@ -66,7 +67,7 @@ const UserProfile = () => {
 
             </Box>
             <Box sx={sideDetail.first}>
-            <UserData />
+            <UserData userId={userId} />
 
             </Box>
      </Box>
