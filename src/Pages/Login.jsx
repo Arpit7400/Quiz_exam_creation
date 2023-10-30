@@ -12,6 +12,7 @@ import SchoolPenLogo from "../Data/SchoolPenLogo.png";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { State } from "../Components/Context/Provider";
+import { enqueueSnackbar } from "notistack";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -70,6 +71,7 @@ const Login = () => {
             // Success
             // Store the user object in local storage
             localStorage.setItem("user", JSON.stringify(response.data));
+            enqueueSnackbar(`${response.data.user.role.toUpperCase()} Login Success`, {variant:'success'} )
             navigate("/admin");
           } else {
             alert("Error occured");
@@ -77,6 +79,7 @@ const Login = () => {
         })
         .catch((err) => {
           console.log(err);
+          enqueueSnackbar(`${err.response.data.message.toUpperCase()}`, {variant:'error'} )
         });
     
   };
@@ -109,7 +112,7 @@ const Login = () => {
         component="div"
         style={containerStyle}
       >
-        <Container
+        <Box
           sx={{
             bgcolor: "#fff",
             borderRadius: "20px",
@@ -178,13 +181,18 @@ const Login = () => {
             </Button>
             
           </Box>
-          <FormGroup
-            onSubmit={(e) => e.preventDefault()}
+          <form
+            onSubmit={(e) => {
+              e.preventDefault()
+              login()
+            }
+            }
             className="login-form"
             sx={{ textAlign: "center", w: "100%" }}
           >
             <div>
               <Input
+              required
                 name="email"
                 type="text"
                 value={note.email}
@@ -194,6 +202,8 @@ const Login = () => {
                 disableUnderline ={true}
               />
               <Input
+              
+              required
                 name="password"
                 type="password"
                 value={note.password}
@@ -217,7 +227,7 @@ const Login = () => {
             </div>
             <Button
               type="submit"
-              onClick={login}
+              // onClick={login}
               sx={{
                 width: "100%",
                 borderRadius: "12px",
@@ -236,8 +246,8 @@ const Login = () => {
             >
               Login
             </Button>
-          </FormGroup>
-        </Container>
+          </form>
+        </Box>
       </Box>
   );
 };

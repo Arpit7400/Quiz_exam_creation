@@ -93,10 +93,23 @@ const Provider = ({ children }) => {
     newPassword:'',
   })
   const [userImage, setUserImage] = useState('')
-    
+  let usersdata = JSON?.parse(localStorage?.getItem('user'));
+
+  useEffect(()=>{
+    const fetchUserImg =  async ()=>{
+      try{
+        const userID = await usersdata?.user?._id
+       const {data} = await axios.get(`${link}/user/${userID}`)
+       setUserImage(data.user_image)
+
+      }catch(error){
+        console.log('Error getting Image URL :', error)
+      }
+    } 
+    fetchUserImg()
+  }, [usersdata?.user?.user_image])
  
   const [assignedUser, setAssignedUser] = useState({})
-  let usersdata = JSON?.parse(localStorage?.getItem('user'));
 
   return (
     <ChatContext.Provider

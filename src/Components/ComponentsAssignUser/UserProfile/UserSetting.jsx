@@ -11,6 +11,7 @@ import IDPassword from './IDPassword';
 import { Avatar, Button, IconButton, Tooltip } from '@mui/material';
 import { State } from '../../Context/Provider';
 import axios from 'axios';
+import { enqueueSnackbar } from 'notistack';
 
 
 
@@ -53,14 +54,17 @@ const UserSetting = () => {
     setUserImage(image)
   }
   const handleUploadImage = ()=>{
-
-    const userID = usersdata.user._id
+    const formData = new FormData();
+    formData.append('user_image', userImage)
+    const userID = usersdata.user.user_id
     axios
-    .put(`${link}/update_user_profile/${userID}`,userImage )
+    .put(`${link}/update_user_profile/${userID}`,formData )
       .then((response) => {
         if (response.status === 200) {
           // setbool(!bool)
+          enqueueSnackbar("Image updated successfully", {variant: 'success'})
           console.log("Image updated successfully");
+          // setUserImage('')
           
         } else {
           alert("Error occured");
@@ -73,9 +77,14 @@ const UserSetting = () => {
 
   useEffect(()=>{
     const fetchUserImg =  async ()=>{
-      const userID = await usersdata.user._id
-     const {data} = await axios.get(`${link}/user/${userID}`)
-     setUserImage(data.user_image)
+      try{
+        const userID = await usersdata.user._id
+       const {data} = await axios.get(`${link}/user/${userID}`)
+       setUserImage(data.user_image)
+
+      }catch(error){
+        console.log('Error getting Image URL :', error)
+      }
     } 
     fetchUserImg()
   }, [])
@@ -100,7 +109,7 @@ const UserSetting = () => {
                         {typeof(userImage) === 'object'?
                         <img src={URL.createObjectURL(userImage)} style={{width:'200px', height:'200px', objectFit:'contain'}}></img>
                         :
-                        <img src={`${link}/get_image_user/${userImage}`} style={{width:'200px', height:'200px', objectFit:'contain'}}></img>
+                        <img src={`${link}/get_user_profile-image/${userImage}`} style={{width:'200px', height:'200px', objectFit:'contain'}}></img>
                     }
                         </Tooltip>
                       
@@ -126,7 +135,7 @@ const UserSetting = () => {
                 </label> */}
                 <Box sx={{ display:'flex', px:'25px', gap:'20px', alignItems:'center'}}>
                 <Button disabled={typeof(userImage)=== 'string'} onClick={handleUploadImage} component="span" aria-label="Upload image" style={{background: "#7A58E6",color: "#FFF",padding:'10px 20px',}} sx={style.btnStyle}>Upload Image</Button>
-                <Button style={{background: "#F5F6F7",color: "#707070",padding:'10px 20px',}} sx={style.btnStyle}>Delete</Button>
+                
 
                 </Box>
 

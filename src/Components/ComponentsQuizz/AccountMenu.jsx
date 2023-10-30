@@ -14,7 +14,7 @@ import { styleProfile } from '../../styles/style';
 import { State } from '../Context/Provider';
 
 export default function AccountMenu() {
-  const {usersdata} = State()
+  const {usersdata, link, userImage} = State()
   const navigate = useNavigate()
   
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -39,7 +39,8 @@ export default function AccountMenu() {
             disableRipple ={true}
             edge={false}
           >
-            <Avatar sx={styleProfile.topIcon}>A</Avatar>
+
+            <Avatar src={userImage? `${link}/get_user_profile-image/${userImage}`:""}  sx={styleProfile.topIcon}>A</Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -84,10 +85,7 @@ export default function AccountMenu() {
           handleClose() 
           navigate(`/user/${usersdata.user._id}`)
           }}>
-          <Avatar /> Profile
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Avatar /> My account
+          <Avatar src={userImage? `${link}/get_user_profile-image/${userImage}`:""}  /> Profile
         </MenuItem>
         <Divider />
         <MenuItem onClick={()=>{
@@ -102,6 +100,7 @@ export default function AccountMenu() {
         <MenuItem onClick={()=>{
           handleClose()
           navigate('/')
+          localStorage.removeItem("user")
           }}>
           <ListItemIcon>
             <Logout fontSize="small" />

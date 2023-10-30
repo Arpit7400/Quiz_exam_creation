@@ -4,6 +4,7 @@ import { btnStyle, inputStyle } from "../../../styles/style";
 import { Box } from "@mui/system";
 import { State } from "../../Context/Provider";
 import axios from "axios";
+import { enqueueSnackbar } from "notistack";
 
 
 const IDPassword = () => {
@@ -28,7 +29,7 @@ const IDPassword = () => {
     // formData.append('city', userData.city);
     // formData.append('state', userData.state);
     // formData.append('pincode', userData.pincode);
-    formData.append('user_image', userImage);
+    // formData.append('user_image', userImage);
     // console.log(updateUser)
     // console.log(userImage)
     // console.log(userData)
@@ -40,7 +41,8 @@ const IDPassword = () => {
           if (response.status === 200) {
             // setbool(!bool)
             console.log("Data updated successfully");
-             
+            enqueueSnackbar("Password updated successfully", {variant: 'success'})
+            setUpdateUser({...updateUser, oldPassword:'', newPassword:''})
             
           } else {
             alert("Error occured");
@@ -48,6 +50,8 @@ const IDPassword = () => {
         })
         .catch((err) => {
           console.log(err);
+          enqueueSnackbar(`${err.response.data.error}`, {variant: 'warning'})
+
         });
     
   }

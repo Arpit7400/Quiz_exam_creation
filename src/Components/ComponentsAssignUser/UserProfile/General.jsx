@@ -4,6 +4,7 @@ import { btnStyle, inputStyle } from "../../../styles/style";
 import { Box } from "@mui/system";
 import { State } from "../../Context/Provider";
 import axios from "axios";
+import { enqueueSnackbar } from "notistack";
 
 
 const General = () => {
@@ -34,14 +35,17 @@ const General = () => {
         .then((response) => {
           if (response.status === 200) {
             // setbool(!bool)
+            enqueueSnackbar("Data updated successfully", {variant: 'success'})
             console.log("Data updated successfully");
             
           } else {
             alert("Error occured");
+
           }
         })
         .catch((err) => {
-          console.log(err);
+          console.log(err.response.data);
+          enqueueSnackbar(`${err.response.data.error}`, {variant: 'info'})
         });
     
   }

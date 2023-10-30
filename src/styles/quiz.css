@@ -471,6 +471,9 @@ button.btnt{
     font-size: 4px;
     rotate: 90deg;
 }
+.disabled {
+    pointer-events: none;
+}
 
 /* responsive css */
 @media screen and (max-width: 1200px) {

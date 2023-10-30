@@ -15,22 +15,25 @@ const UserData = ({userId}) => {
   const address = userData?.address
   useEffect(() => {
     const fetchUserData = async ()=>{
-      
+      const {data} = await axios.get(`${link}/user/${userId}`)
+      setUserData(data)
+      console.log(userData)
     }
-    axios.get(`${link}/user/${userId}`).then(
-    (response) => {
-      setUserData(response.data);
-    }
-  ).catch((error) => {
-      console.error(error);
-    });
+  //   axios.get(`${link}/user/${userId}`).then(
+  //   (response) => {
+  //     setUserData(response.data);
+  //   }
+  // ).catch((error) => {
+  //     console.error(error);
+  //   });
+  fetchUserData()
   }, []);
   return (
     <Box sx={sideDetail.second} >
         <Box style={{ marginBottom:'35px', textAlign:'-webkit-center' }} >
           
           <Avatar 
-            src={userData?.image? `${link}/get_image/${userData?.image}`:""} 
+            src={userData?.user_image? `${link}/get_user_profile-image/${userData?.user_image}`:""} 
             style={{
             width: "300px",
             height: "300px",
