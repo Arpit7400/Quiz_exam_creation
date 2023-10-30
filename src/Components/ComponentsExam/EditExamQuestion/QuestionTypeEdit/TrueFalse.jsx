@@ -158,7 +158,7 @@ const TrueFalse = (props, { open, setOpen, }) => {
             >
               {question.img?
             <img
-                src={`${link}/get_image/${question.img}`}
+                src={`${link}/get_image_exam/${question.img}`}
                 alt="User Image"
                 style={{ height: '80px', width: '80px', objectFit: 'contain', marginRight: '12px' }}
                 onMouseEnter={handleMouseEnter}
@@ -224,7 +224,7 @@ const TrueFalse = (props, { open, setOpen, }) => {
                     objectFit: "contain",
                     marginRight:'12px',
                   }}
-                  src={option.img?`${link}/get_image/${option.img}`:null}
+                  src={option.img?`${link}/get_image_exam/${option.img}`:null}
                 ></img>
                 :null}
                 <FormControlLabel

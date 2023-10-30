@@ -186,7 +186,7 @@ const MultipleAns = (props,{ open, setOpen,}) => {
             >
             {question.img?
             <img
-                src={question.img?`${link}/get_image/${question.img}`:null}
+                src={question.img?`${link}/get_image_exam/${question.img}`:null}
                 alt="User Image"
                 style={{ height: '80px', width: '80px', objectFit: 'contain', marginRight: '12px' }}
                 onMouseEnter={handleMouseEnter}
@@ -252,7 +252,7 @@ const MultipleAns = (props,{ open, setOpen,}) => {
                     objectFit: "contain",
                     marginRight:'12px',
                   }}
-                  src={option.img?`${link}/get_image/${option.img}`:null}
+                  src={option.img?`${link}/get_image_exam/${option.img}`:null}
                 ></img>
                 :null}
                   <FormControlLabel

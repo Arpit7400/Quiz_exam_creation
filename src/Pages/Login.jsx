@@ -61,7 +61,7 @@ const Login = () => {
   const login = () => {
     
       axios
-        .post(`${link}/login`, {
+        .post(`${link}/quizz_login`, {
           user_id: note.email,
           password: note.password,
           role: role,

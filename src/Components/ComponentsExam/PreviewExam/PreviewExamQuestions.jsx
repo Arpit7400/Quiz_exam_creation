@@ -92,7 +92,7 @@ const PreviewExamQuestions = ({heading, number}) => {
             <img onClick={() => handleOpen(index)} style={{position:'absolute', top:'30px', right:'30px', cursor:'pointer'}} src={edit}></img>
               {open[index] && <PreviewExamEdit open={open} setOpen={setOpen} handleOpen={handleOpen} data={data} />}
             <Box sx={{display:'flex', mr:'20px', mb:'20px'}}>
-                {data.img ? <img alt='Question image' style={{ width: '200px', height: '200px', objectFit: 'contain', marginRight: '20px' }} src={`${link}/get_image/${data.img}`}></img> : <></>}
+                {data.img ? <img alt='Question image' style={{ width: '200px', height: '200px', objectFit: 'contain', marginRight: '20px' }} src={`${link}/get_image_exam/${data.img}`}></img> : <></>}
               <p>{data.question} </p>
 
             </Box>
@@ -109,7 +109,7 @@ const PreviewExamQuestions = ({heading, number}) => {
                 // const is_answer = option.is_answer             
                 return(
                   <Box key={i} sx={{ display: 'flex', mr: '20px', mb: '20px' }}>{
-                    option.img?<img src={`${link}/get_image/${option.img}`} alt='get-image' style={{ width: '100px', height: '100px', objectFit: 'contain', marginRight: '20px' }}  />:<></>
+                    option.img?<img src={`${link}/get_image_exam/${option.img}`} alt='get-image' style={{ width: '100px', height: '100px', objectFit: 'contain', marginRight: '20px' }}  />:<></>
                     }
                     <FormControlLabel key={i}  value="option" control={<Radio disabled={data.ans != i} /> } label={text} />
                   </Box>

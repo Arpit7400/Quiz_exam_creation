@@ -163,7 +163,7 @@ const SingleAns = (props,{ open, setOpen,}) => {
           <Box sx={{ display: "flex", width: "100%", alignItems: "center", mb:'20px' }}>
 
           <CustomWidthTooltip
-            title={<img src={`${link}/get_image/${question.img}`} alt="Que Img" style={{ height: '400px', width: '400px', objectFit: 'contain' }} /> }
+            title={<img src={`${link}/get_image_exam/${question.img}`} alt="Que Img" style={{ height: '400px', width: '400px', objectFit: 'contain' }} /> }
             arrow
             open={isHovered}
             onClose={handleMouseLeave}
@@ -174,7 +174,7 @@ const SingleAns = (props,{ open, setOpen,}) => {
             >
               {question.img?
             <img
-                src={`${link}/get_image/${question.img}`}
+                src={`${link}/get_image_exam/${question.img}`}
                 alt="Que Img"
                 style={{ height: '80px', width: '80px', objectFit: 'contain', marginRight: '12px' }}
                 onMouseEnter={handleMouseEnter}
@@ -241,7 +241,7 @@ const SingleAns = (props,{ open, setOpen,}) => {
                     marginRight:'12px',
                   }}
                   
-                  src={option.img?`${link}/get_image/${option.img}`:null}
+                  src={option.img?`${link}/get_image_exam/${option.img}`:null}
                 ></img>
                 :null}
                 <FormControlLabel

@@ -164,7 +164,7 @@ const PreviewExamEdit = ({ open, setOpen,handleOpen,data}) => {
           sx={{background: "#fff",width: "100%",borderRadius: "40px",}}>
           <Box sx={{ display: "flex", width: "100%", alignItems: "center", mb:'20px' }}>
           <CustomWidthTooltip
-            title={<img src={`${link}/get_image/${data.img}`} alt="User Image" style={{ height: '400px', width: '400px', objectFit: 'contain' }} /> }
+            title={<img src={`${link}/_exam/${data.img}`} alt="User Image" style={{ height: '400px', width: '400px', objectFit: 'contain' }} /> }
             arrow
             open={isHovered}
             onClose={handleMouseLeave}
@@ -241,7 +241,7 @@ const PreviewExamEdit = ({ open, setOpen,handleOpen,data}) => {
                     objectFit: "contain",
                     marginRight:'12px',
                   }}
-                  src={`${link}/get_image/${option.img}`}
+                  src={`${link}/get_image_exam/${option.img}`}
                 ></img>
                 :null}
                 <FormControlLabel
