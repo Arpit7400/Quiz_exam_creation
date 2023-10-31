@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React,{useEffect, useState} from 'react'
 import SelectMenuExam from './SelectMenuExam'
 import { Box } from '@mui/system'

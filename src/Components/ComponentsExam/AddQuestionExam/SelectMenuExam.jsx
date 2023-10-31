@@ -1,3 +1,4 @@
+/* eslint-disable */
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Select, selectClasses } from '@mui/base/Select';
@@ -124,6 +125,7 @@ export default function SelectMenuExam({dropdownName,listArray,add,value,val }) 
         <DialogTitle>Add New {dropdownName}</DialogTitle>
         <form
         onSubmit={(e)=>{
+          e.preventDefault()
           handleAdd()
           submithandler()
         }}

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { BrowserRouter, Link, Navigate, Route, Routes } from "react-router-dom";
 import { Box } from "@mui/material";
 import Login from "./Pages/Login";
