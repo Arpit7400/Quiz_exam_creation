@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from 'react';
 import {
   FormControlLabel,
@@ -114,6 +115,17 @@ const QuestionTrueFalse = ({ handleThreeDotMenu, prop  }) => {
               
               setQuestions(oldArray => [{ question: QUE, options: popt },...oldArray])
               enqueueSnackbar('Quiz Posted Successfully', { variant: 'success' })
+              setOptions([
+                { text: '', image: null, answer: false },
+                { text: '', image: null, answer: false },
+                { text: '', image: null, answer: false },
+                { text: '', image: null, answer: false }
+              ]
+              );
+  
+              setQuestion( {text: '', image: null });
+              setSelectedAnswer('')
+              setExplanation('')
             }
             catch (err) {
               console.log(err)

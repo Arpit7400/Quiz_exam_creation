@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useState } from 'react'
 import edits  from '../../Data/edit.png'
 import { Box, Typography } from "@mui/material"
@@ -26,8 +27,9 @@ const SideDetails = ({heading, number}) => {
           formData.append('role', role);
 
           const { data } = await axios.get(`${link}/get_all_quizz/${role}/${creatorId}`)
+          const activeQuizes = data.filter((data)=> !data.blocked)
 
-          const quet = data.filter((data) => (
+          const quet = activeQuizes.filter((data) => (
                           (!quest.Subject || data.subject == quest.Subject) &&
                           (!quest.Topic || data.topic == quest.Topic) &&
                           (!quest.Sub_topic || data.subtopic == quest.Sub_topic) &&

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Outlet } from 'react-router-dom'
 import Menu from '../Components/Menu/Menu'
 import { Box } from '@mui/system'

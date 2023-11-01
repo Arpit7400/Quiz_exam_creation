@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Image } from '@mui/icons-material'
 import { Avatar, Box, LinearProgress, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'

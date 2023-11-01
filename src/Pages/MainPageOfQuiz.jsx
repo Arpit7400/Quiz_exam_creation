@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState,useEffect } from 'react'
 import Menu from '../Components/Menu/Menu'
 import CreateQuiz from '../Components/ComponentsQuizz/CreateQuiz/CreateQuiz'

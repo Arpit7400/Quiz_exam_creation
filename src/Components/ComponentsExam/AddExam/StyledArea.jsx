@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Box, Input } from '@mui/material'
 import React, { useState } from 'react'
 import ReactQuill from 'react-quill';

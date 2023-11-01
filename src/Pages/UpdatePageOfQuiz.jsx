@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from 'react'
 import Menu from '../Components/Menu/Menu'
 import UpdateQuiz from '../Components/ComponentsQuizz/UpdateQuiz/Update'

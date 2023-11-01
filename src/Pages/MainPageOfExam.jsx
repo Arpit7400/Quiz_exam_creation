@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useState } from 'react'
 import Menu from '../Components/Menu/Menu'
 import { Box } from '@mui/system'

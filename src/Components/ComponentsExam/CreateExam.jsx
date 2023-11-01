@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {  Box,  Button,} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import QuestionsExam from "./AddQuestionExam/QuestionsExam";

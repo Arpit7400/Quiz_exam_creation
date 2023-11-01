@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Avatar, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';

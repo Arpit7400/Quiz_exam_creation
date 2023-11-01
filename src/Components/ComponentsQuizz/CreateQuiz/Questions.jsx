@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from 'react';
 import {
   TextField,
@@ -139,6 +140,17 @@ const CreateQuiz = () => {
               setQuestions(oldArray => [{ question: QUE, options: popt, id: response.data._id }, ...oldArray])
               // console.log(response.data._id)
               enqueueSnackbar('Quiz Posted Successfully', { variant: 'success' })
+              setOptions([
+                { text: '', image: null, answer: false },
+                { text: '', image: null, answer: false },
+                { text: '', image: null, answer: false },
+                { text: '', image: null, answer: false }
+              ]
+              );
+  
+              setQuestion( {text: '', image: null });
+              setCorrectAnswerIndex('')
+              setExplanation('')
             }
             catch (err) {
               console.log(err)

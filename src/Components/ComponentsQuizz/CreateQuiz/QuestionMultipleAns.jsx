@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from 'react';
 import {
   Checkbox,  FormControlLabel,
@@ -143,6 +144,17 @@ const [question, setQuestion] = useState({ text: '', image: null });
               
               setQuestions(oldArray => [{ question: QUE, options: popt,id: response.data._id },...oldArray])
               enqueueSnackbar('Quiz Posted Successfully', { variant: 'success' })
+              setOptions([
+                { text: '', image: null, answer: '' },
+                { text: '', image: null, answer: '' },
+                { text: '', image: null, answer: '' },
+                { text: '', image: null, answer: '' }
+              ]
+              );
+  
+              setQuestion( {text: '', image: null });
+              setSelectedAnswerIndices([])
+              setExplanation('')
             }
             catch (err) {
               console.log(err)

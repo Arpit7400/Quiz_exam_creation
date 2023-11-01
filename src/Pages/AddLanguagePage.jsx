@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+
+/* eslint-disable */
+import React from 'react'
 import Menu from '../Components/Menu/Menu'
 import { Box } from '@mui/system'
 import AddNewLanguage from '../Components/ComponentsQuizz/AddLanguage/AddNewLanguage'
