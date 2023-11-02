@@ -50,7 +50,7 @@ const Provider = ({ children }) => {
   const [editexam, seteditexam] = useState([]);
 
   const [examid, setexamid] = useState({id:null, qno:1});
-  const link="http://localhost:5000"
+  const link="http://34.131.103.255"
   const [dsubject, setdsubject] = useState([])
   const [dtopic, setdtopic] = useState([])
   const [dlanguage, setdlanguage] = useState([])
