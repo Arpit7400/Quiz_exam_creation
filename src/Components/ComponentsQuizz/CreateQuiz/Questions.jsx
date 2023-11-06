@@ -100,7 +100,7 @@ const CreateQuiz = () => {
       let quizType = quest.Quiz_Type
       if(quizType.includes("multiple")){
         quizType = 'multiple'
-      }else if(quizType.includes('Single')){
+      }else if(quizType.includes('single')){
         quizType = 'single'
       }else if(quizType.includes(' or ')){
         quizType = 'truefalse'
@@ -233,6 +233,13 @@ const required = (e,i)=>{
                         value={index.toString()}
                         control={<Radio sx={{ '& .MuiSvgIcon-root': { fontSize: 35, }}} checked={correctAnswerIndex === index} onChange={handleRadioChange} />}
                         label=""
+                        required
+                        sx={{
+                          '.MuiFormControlLabel-asterisk': {
+                            display: 'none', // This will hide the asterisk
+                          },
+
+                        }}
                         labelPlacement="start"
                         onInvalid={required}
                         

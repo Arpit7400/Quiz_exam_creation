@@ -229,9 +229,15 @@ const [question, setQuestion] = useState({ text: '', image: null });
         {options.map((option, index) => (
           <Box key={index} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px', width: '100%', gap: '32px' }}>
             <FormControlLabel
+                required={selectedAnswerIndices.length === 0}
+                sx={{
+                  '.MuiFormControlLabel-asterisk': {
+                    display: 'none', // This will hide the asterisk
+                  },
+
+                }}
               control={
                 <Checkbox
-                required={selectedAnswerIndices==[]}
                   sx={{ '& .MuiSvgIcon-root': { fontSize: 35 } }}
                   checked={selectedAnswerIndices.includes(index)}
                   onChange={(event) => handleCheckboxChange(index)}

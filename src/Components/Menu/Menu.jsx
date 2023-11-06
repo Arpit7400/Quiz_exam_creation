@@ -35,7 +35,8 @@ const Menu = () => {
     sx={{
       background:'#fff',
       p:'18px 32px',
-      height:'120vh',
+      maxHeight:'120vh',
+      minHeight:'100vh',
       position:{
         xs: 'fixed',
         sm: "fixed",

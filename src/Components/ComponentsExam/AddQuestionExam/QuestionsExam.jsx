@@ -47,7 +47,7 @@ const QuestionsExam = (props) => {
     setOptions(newOptions);
   };
 
-  const handleRadioChange = (event, index) => {
+  const handleRadioChange = (event) => {
     const selectedIndex = parseInt(event.target.value, 10);
     
     // Create a new array with updated answer values
@@ -57,10 +57,8 @@ const QuestionsExam = (props) => {
     }));
 
     setOptions(newOptions);
-    setCorrectAnswerIndex(index);
-    // console.log(correctAnswerIndex)
+    setCorrectAnswerIndex(selectedIndex);
 };
-
   const handleDeleteImage = (type) => {
     if (type === 'question') {
       setQuestion({ ...question, image: null });
@@ -274,10 +272,19 @@ const QuestionsExam = (props) => {
                 {options?.map((option, index) => (
                     <Box key={index} style={{ display: 'flex', alignItems: 'center', justifyContent:'space-between', marginBottom: '8px', width:'100%', gap:'32px' }}>
                     <FormControlLabel
-                        value={index}
-                        control={<Radio sx={{ '& .MuiSvgIcon-root': { fontSize: 35, }}} checked={correctAnswerIndex === index} onClick={(e)=>handleRadioChange(e,index)} />}
+                        name='Answer'
+                        value={index.toString()}
+                        control={<Radio sx={{ '& .MuiSvgIcon-root': { fontSize: 35, }}} checked={correctAnswerIndex === index} onChange={handleRadioChange} />}
                         label=""
+                        required
+                        sx={{
+                          '.MuiFormControlLabel-asterisk': {
+                            display: 'none', // This will hide the asterisk
+                          },
+
+                        }}
                         labelPlacement="start"
+                        onInvalid={required}
                         
                     />
                     <Input

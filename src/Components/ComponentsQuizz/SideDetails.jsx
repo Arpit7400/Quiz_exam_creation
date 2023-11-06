@@ -27,6 +27,7 @@ const SideDetails = ({heading, number}) => {
           formData.append('role', role);
 
           const { data } = await axios.get(`${link}/get_all_quizz/${role}/${creatorId}`)
+          // console.log(data)
           const activeQuizes = data.filter((data)=> !data.blocked)
 
           const quet = activeQuizes.filter((data) => (
@@ -41,9 +42,10 @@ const SideDetails = ({heading, number}) => {
 
           setQuestions([]);
           quet?.map((dat, i) => {
+            const quiz_type = dat.quiz_type
           const { question, options, explanation} = dat.question_container
 
-          setQuestions(oldArray => [{ question: question, options: options, id: dat._id, explanation: explanation }, ...oldArray])
+          setQuestions(oldArray => [{ question: question, options: options, id: dat._id, explanation: explanation, quiz_type:quiz_type }, ...oldArray])
           })
       } catch(error){
         console.error('Error Fetching questions: ', error)
@@ -64,7 +66,7 @@ const SideDetails = ({heading, number}) => {
       
       <Box>
         {questions?.map((data, i) => {
-        const {question, options, id, explanation } = data
+        const {question, options, id, explanation, quiz_type } = data
           return (
           <div className='preview-question' key={i}>
             <Link to={`/update/${id}`} >

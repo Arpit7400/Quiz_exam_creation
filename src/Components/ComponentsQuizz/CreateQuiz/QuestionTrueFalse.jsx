@@ -19,7 +19,7 @@ import { enqueueSnackbar } from 'notistack';
 
 const QuestionTrueFalse = ({ handleThreeDotMenu, prop  }) => {
 
-  const { quest, questions, setQuestions,link } = State();
+  const { quest,setquest, questions, setQuestions,link } = State();
   const [question, setQuestion] = useState({ text: '', image: null });
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [options, setOptions] = useState([
@@ -77,11 +77,12 @@ const QuestionTrueFalse = ({ handleThreeDotMenu, prop  }) => {
       let quizType = quest.Quiz_Type
       if(quizType.includes("multiple")){
         quizType = 'multiple'
-      }else if(quizType.includes('Single')){
+      }else if(quizType.includes('single')){
         quizType = 'single'
       }else{
         quizType = 'truefalse'
       }
+      console.log(quest.Quiz_Type)
     const formData = new FormData();
     formData.append('language', quest.Language); 
     formData.append('class', quest.Class);

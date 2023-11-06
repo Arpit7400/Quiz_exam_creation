@@ -37,15 +37,19 @@ const QuestionTrueFalseExam = (props) => {
     setQuestion({ ...question, text: event.target.value });
   };
 
-  const handleRadioChange = (selectedIndex) => {
+
+  const handleRadioChange = (event) => {
+    const selectedIndex = parseInt(event.target.value, 10);
+    
+    // Create a new array with updated answer values
     const newOptions = options.map((option, index) => ({
-      ...option,
-      answer: index === selectedIndex,
+        ...option,
+        answer: index === selectedIndex,
     }));
-  
+
     setOptions(newOptions);
     setSelectedAnswer(selectedIndex);
-  };
+};
 
   const handleOptionChange = (event, index) => {
     const updatedOptions = [...options];
@@ -210,11 +214,24 @@ const QuestionTrueFalseExam = (props) => {
 
       {options.map((option, index) => (
         <Box key={index} sx={{ display: 'flex', alignItems: 'center', mb: '16px' }}>
-          <Radio
-            sx={{ '& .MuiSvgIcon-root': { fontSize: 35 }, marginRight: '16px' }}
-            checked={selectedAnswer === index}
-            onChange={() => handleRadioChange(index)}
+          <FormControlLabel
+              name='Answer'
+              value={index.toString()}
+              control={<Radio sx={{ '& .MuiSvgIcon-root': { fontSize: 35, }}} checked={selectedAnswer === index} onChange={handleRadioChange} />}
+              label=""
+              required
+              sx={{
+                '.MuiFormControlLabel-asterisk': {
+                  display: 'none', // This will hide the asterisk
+                },
+                marginRight: '16px'
+
+              }}
+              labelPlacement="start"
+              onInvalid={required}
+              
           />
+         
           <Input
            required
            name={`Option ${index+1}`}

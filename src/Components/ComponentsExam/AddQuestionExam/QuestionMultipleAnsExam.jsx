@@ -248,6 +248,13 @@ const QuestionMultipleAnsExam = (props) => {
         {options.map((option, index) => (
           <Box key={index} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px', width: '100%', gap: '32px' }}>
             <FormControlLabel
+            required={selectedAnswerIndices.length===0}
+            sx={{
+              '.MuiFormControlLabel-asterisk': {
+                display: 'none', // This will hide the asterisk
+              },
+
+            }}
               control={
                 <Checkbox
                   sx={{ '& .MuiSvgIcon-root': { fontSize: 35 } }}

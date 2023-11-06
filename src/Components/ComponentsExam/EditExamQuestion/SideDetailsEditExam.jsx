@@ -18,8 +18,13 @@ const SideDetailsExam = ({heading}) => {
         const creatorI = usersdata.user._id
         const { data } = await axios.get(`${link}/get_topics/${creatorI}`)
         // console.log(data)
-        SetExams(data)
-
+        const mapReverse1 = data
+          .slice(0)
+          .reverse()
+          .map(element => {
+            return element;
+          });
+        SetExams(mapReverse1)
       } catch(error){
         console.error('Error Fetching questions: ', error)
       }

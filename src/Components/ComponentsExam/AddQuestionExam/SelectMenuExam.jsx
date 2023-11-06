@@ -290,6 +290,7 @@ const StyledListbox = styled('ul')(
   padding: 6px;
   padding-top:32px;
   width: 400px;
+  max-height: 220px;
   border-bottom-radius: 12px;
   overflow: auto;
   outline: 0px;
