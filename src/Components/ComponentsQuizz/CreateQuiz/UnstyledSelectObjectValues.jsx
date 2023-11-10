@@ -13,7 +13,7 @@ import axios from 'axios';
 
 export default function UnstyledSelectObjectValues({dropdownName,listArray,add,value,val }) {
   const style = dropdownName == "Language" ? "#fff" : '#F5F6F7'
-  const { quest, setquest,setdsubject,setdtopic,setdstopic , setdlanguage,link} = State();
+  const { quest, setquest,setdsubject,setdtopic,setdstopic , setdlanguage,link, setdaclasss} = State();
   const [open, setOpen] = React.useState(false);
   const index = (dropdownName == "Subject")?0:(dropdownName =="Topic")?1:(dropdownName == 'Sub topic')?2:null
 
@@ -58,10 +58,15 @@ export default function UnstyledSelectObjectValues({dropdownName,listArray,add,v
         console.log(err);
     });
   }
+  
   else {
-    if (dropdownName == "Subject") {
+    if(dropdownName == "Class"){
+    formData.append('class', sub)
+    }
+    else if (dropdownName == "Subject") {
       formData.append('subject', sub);
       formData.append('subject_image', subImg[0].image);
+      formData.append('class', quest.Class)
 
     }
     else if (dropdownName == "Topic") {
@@ -79,7 +84,7 @@ export default function UnstyledSelectObjectValues({dropdownName,listArray,add,v
       .then((response) => {
         if (response.status === 200) {
           console.log("Data added successfully");
-          (dropdownName=="Subject")?setdsubject(oldArray => [sub,...oldArray]):(dropdownName=="Topic")?setdtopic(oldArray => [sub,...oldArray]):setdstopic(oldArray => [sub,...oldArray])
+          (dropdownName=="Subject")?setdsubject(oldArray => [sub,...oldArray]):(dropdownName=="Topic")?setdtopic(oldArray => [sub,...oldArray]):(dropdownName=="Class")?setdaclasss(oldArray => [sub, ...oldArray]):setdstopic(oldArray => [sub,...oldArray])
         } else {
           alert("Error occured");
         }

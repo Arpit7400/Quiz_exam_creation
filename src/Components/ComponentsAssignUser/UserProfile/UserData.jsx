@@ -18,7 +18,6 @@ const UserData = ({userId}) => {
     const fetchUserData = async ()=>{
       const {data} = await axios.get(`${link}/user/${userId}`)
       setUserData(data)
-      console.log(userData)
     }
   //   axios.get(`${link}/user/${userId}`).then(
   //   (response) => {

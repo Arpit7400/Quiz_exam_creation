@@ -29,7 +29,6 @@ export default function SelectMenuAssign({dropdownName,listArray,add,value}) {
     const newImg = [...subImg]
     newImg[0].image = event.target.files[0]
     setSubImg(newImg)
-    console.log(subImg)
   };
   
   const handleOpen = () => {

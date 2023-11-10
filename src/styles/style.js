@@ -158,7 +158,6 @@ export const inputStyle = {
   padding: "11px 27px",
   borderRadius: "12px",
   background: "#EFF3F4",
-  width: "300px",
   border: "none",
   color: "#707070",
   fontSize: "18px",

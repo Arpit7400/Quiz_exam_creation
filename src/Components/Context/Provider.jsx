@@ -77,6 +77,7 @@ const Provider = ({ children }) => {
   const [dasubject, setdasubject] = useState([])
   const [datopic, setdatopic] = useState([])
   const [dalanguage, setdalanguage] = useState([])
+  const [daclasss,setdaclasss]=useState([])
   
   const [userData, setUserData] = useState({
     name:'',
@@ -151,6 +152,7 @@ const Provider = ({ children }) => {
         dasubject, setdasubject,
         datopic, setdatopic,
          dalanguage, setdalanguage,
+         daclasss,setdaclasss,
          userData, setUserData,
          updateUser, setUpdateUser,
         userImage, setUserImage,
