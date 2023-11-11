@@ -144,7 +144,7 @@ export default function SelectMenuExam({dropdownName,listArray,add,value,val }) 
           <Box>
             <label htmlFor="topic-image-upload">
           <input
-            required
+            // required
             type="file"
             accept="image/*"
             onChange={(e) => handleImageUpload(e, null, 'topic')}

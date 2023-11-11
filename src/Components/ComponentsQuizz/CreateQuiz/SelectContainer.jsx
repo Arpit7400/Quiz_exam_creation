@@ -24,8 +24,37 @@ const SelectContainer = () => {
       Language: "",
       
     })
-  }
+    setdstopic([]);
+    setdsubject([])
+    setdtopic([])
 
+  }
+  const [isAddSubject, setIsAddSubject] = useState(false)
+  const [isAddTopic, setIsAddTopic] = useState(false)
+  const [isAddSubTopic, setIsAddSubTopic] = useState(false)
+  useEffect(()=>{
+    if(quest.Subject){
+      setIsAddTopic(true)
+      
+    }else{
+      setIsAddTopic(false)
+    }
+  },[quest.Subject])
+  useEffect(()=>{
+    if(quest.Class){
+      setIsAddSubject(true)
+      
+    }else{
+      setIsAddSubject(false)
+    }
+  },[quest.Class])
+  useEffect(()=>{
+    if(quest.Topic){
+      setIsAddSubTopic(true)
+    }else{
+      setIsAddSubTopic(false)
+    }
+  },[quest.Topic])
   useEffect(()=>{
     const fetchClass = async ()=>{
       try{
@@ -56,8 +85,7 @@ const SelectContainer = () => {
         console.error('Error Fetching questions: ', error)
       }
     }
-    if(role=="admin")
-      fetchSubject()
+    
     
     const fetchuSubject = async ()=>{
       try {
@@ -73,9 +101,12 @@ const SelectContainer = () => {
         console.error('Error Fetching questions: ', error)
       }
     }
-
-    if(role=="user")
+    if(role=="admin"){
+      fetchSubject()
+    }
+    else if(role=="user"){
       fetchuSubject()
+    }
   }, [quest.Class])
 
   useEffect(() => {
@@ -133,19 +164,19 @@ const SelectContainer = () => {
     style={{position:'relative'}}
     >
         <UnstyledSelectObjectValues dropdownName={"Class"} listArray={daclasss} classList={"classChange"} add={true} value={"Class"} val={quest.Class} />
-        <UnstyledSelectObjectValues dropdownName={"Subject"} listArray={dsubject} add={true} value={"Subject"} val={quest.Subject}/>
-        <UnstyledSelectObjectValues dropdownName={"Topic"} listArray={dtopic} add={true} value={"Topic"} val={quest.Topic}/>
-        <UnstyledSelectObjectValues dropdownName={"Sub topic"} listArray={dstopic}add={true} value={"Sub_topic"} val={quest.Sub_topic}/>
+        <UnstyledSelectObjectValues dropdownName={"Subject"} listArray={dsubject} add={isAddSubject} value={"Subject"} val={quest.Subject}/>
+        <UnstyledSelectObjectValues dropdownName={"Topic"} listArray={dtopic} add={isAddTopic} value={"Topic"} val={quest.Topic}/>
+        <UnstyledSelectObjectValues dropdownName={"Sub topic"} listArray={dstopic}add={isAddSubTopic} value={"Sub_topic"} val={quest.Sub_topic}/>
         <UnstyledSelectObjectValues dropdownName={"Level"} listArray={["Beginner", "Intermediate" , "Advance"]} add={false} value={"Level"} val={quest.Level}/>
         <UnstyledSelectObjectValues dropdownName={"Quiz Type"} listArray={["single", "multiple", "truefalse"]} add={false} value={"Quiz_Type"} val={quest.Quiz_Type}/>
-        <Box sx={{position:'absolute', bottom:'5px', right:'5px'}}>
+        {/* <Box sx={{position:'absolute', bottom:'5px', right:'5px'}}>
                 <IconButton
                     onClick={hancleClear}
                     color="primary"
                   >
                     <ClearIcon />
                   </IconButton>
-        </Box>
+        </Box> */}
     </Box>
   )
 }

@@ -70,9 +70,11 @@ const CreateQuiz = () => {
     }
   };
 
+
+
   const handleDeleteOption = (index) => {
     const newOptions = [...options];
-    newOptions[index] = { text: '', image: null };
+    newOptions.splice(index, 1);
     setOptions(newOptions);
   };
 

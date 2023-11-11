@@ -127,7 +127,7 @@ const CreateQuiz = () => {
       let quizType = quest.Quiz_Type
       if(quizType.includes("multiple")){
         quizType = 'multiple'
-      }else if(quizType.includes('Single')){
+      }else if(quizType.includes('single')){
         quizType = 'single'
       }else{
         quizType = 'truefalse'

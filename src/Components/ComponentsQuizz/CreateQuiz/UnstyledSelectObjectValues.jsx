@@ -27,7 +27,6 @@ export default function UnstyledSelectObjectValues({dropdownName,listArray,add,v
     const newImg = [...subImg]
     newImg[0].image = event.target.files[0]
     setSubImg(newImg)
-    console.log(subImg)
   };
   
   const handleOpen = () => {
@@ -73,12 +72,14 @@ export default function UnstyledSelectObjectValues({dropdownName,listArray,add,v
       formData.append('topic', sub);
       formData.append('topic_image', subImg[0].image);
       formData.append('subject', quest.Subject);
+      formData.append('class', quest.Class)
     }
     else {
       formData.append('topic', quest.Topic);
       formData.append('subject', quest.Subject);
       formData.append('subtopic_image', subImg[0].image);
       formData.append('subtopic', sub);
+      formData.append('class', quest.Class)
     }
     axios.post(`${link}/add_Subject_quizz`, formData)
       .then((response) => {
