@@ -9,22 +9,22 @@ import QuestionTrueFalseTopicExam from './QuestionTrueFalseTopicExam'
 
 const QuestionsContainer = () => {
     const {quest,examquest} = State(); ///
-
   return (
     <Box>
                   
       {
         examquest.map((data, index) =>(
                 data.que.question_type === "" ? (
-            <QuestionExamTopic type={data.que.question_type} question={data.que.question_text} options={data.que.options} answer={data.que.answer } qno={data.qno} />
+            <QuestionExamTopic type={data.que.question_type} question={data.que.question_text} options={data.que.options} answer={data.que.answer } qno={data.qno} explanation={data.que.explanation}
+            />
                 ) : data.que.question_type === "Multiple choice - multiple answers" ? (
-                  <QuestionMultipleAnsTopic type={data.que.question_type} question={data.que.question_text} options={data.que.options} answer={data.que.answer } qno={data.qno}/>
+                  <QuestionMultipleAnsTopic type={data.que.question_type} question={data.que.question_text} options={data.que.options} answer={data.que.answer } explanation={data.que.explanation} qno={data.qno}/>
                 ) : data.que.question_type === "True or False" ? (
-                  <QuestionTrueFalseTopicExam type={data.que.question_type} question={data.que.question_text} options={data.que.options} answer={data.que.answer } qno={data.qno} prop={["True", "False"]} />
+                  <QuestionTrueFalseTopicExam type={data.que.question_type} question={data.que.question_text} options={data.que.options} answer={data.que.answer } explanation={data.que.explanation} qno={data.qno} prop={["True", "False"]} />
                 ) : data.que.question_type === "Multiple choice - Single answer" ? (
-                  <QuestionExamTopic type={data.que.question_type} question={data.que.question_text} options={data.que.options} answer={data.que.answer } qno={data.qno} />
+                  <QuestionExamTopic type={data.que.question_type} question={data.que.question_text} options={data.que.options} answer={data.que.answer } explanation={data.que.explanation} qno={data.qno} />
                 ) : data.que.question_type === "Yes or No" ? (
-                  <QuestionTrueFalseTopicExam type={data.que.question_type} question={data.que.question_text} options={data.que.options} answer={data.que.answer } qno={data.qno}
+                  <QuestionTrueFalseTopicExam type={data.que.question_type} question={data.que.question_text} options={data.que.options} answer={data.que.answer } explanation={data.que.explanation} qno={data.qno}
                     quest={["Yes", "No"]}
                 />
             ) : null

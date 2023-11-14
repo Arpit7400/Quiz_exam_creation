@@ -23,3 +23,6 @@
   .custom-menu-paper {
     box-shadow: none !important;
   }
+  .fr-second-toolbar {
+    display: none;
+}

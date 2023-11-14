@@ -17,6 +17,7 @@ import { State } from "../../Context/Provider"
 import axios from 'axios';
 import { btn, qStyle } from '../../../styles/style';
 import { enqueueSnackbar } from 'notistack';
+import Editor from '../../Editor';
 
 const QuestionMultipleAnsExam = (props) => {
   const doit=props.doit
@@ -32,17 +33,17 @@ const QuestionMultipleAnsExam = (props) => {
   const [explanation, setExplanation] = useState('')
 
   const handleExplanationChange = (event)=>{
-    setExplanation(event.target.value)
+    setExplanation(event)
   }
 
 
   const handleQuestionChange = (event) => {
-    setQuestion({ ...question, text: event.target.value });
+    setQuestion({ ...question, text: event });
   };
 
   const handleOptionChange = (event, index) => {
     const newOptions = [...options];
-    newOptions[index].text = event.target.value;
+    newOptions[index].text = event;
     setOptions(newOptions);
   };
 
@@ -98,19 +99,23 @@ const QuestionMultipleAnsExam = (props) => {
       setOptions(newOptions);
     }
   };
+  const handleRemovePTag = (text)=>{
+    return text.slice(3,-4)
+  }
    const handlePostQuestion = () => {
     // const data = {
     const answer = selectedAnswerIndices.map(data=>data+1)
     const formData = new FormData();
     formData.append('question_type', exam.Quiz_Type);
-    formData.append('question_text', question.text);
+    formData.append('question_text', handleRemovePTag(question.text));
     formData.append('question_image', question.image);
     formData.append('answer', answer);
+    formData.append('explanation', handleRemovePTag(explanation));
 
     for (let i = 0; i < options.length; i++) {
       const optionText = options[i].text;
       const optionImageInput = options[i].image;
-      formData.append(`option${i + 1}`, optionText);
+      formData.append(`option${i + 1}`, handleRemovePTag(optionText));
       formData.append(`option${i + 1}_image`, optionImageInput);
     }
     if(doit){
@@ -137,6 +142,7 @@ const QuestionMultipleAnsExam = (props) => {
 
             setQuestion( {text: '', image: null });
             setSelectedAnswerIndices('')
+            setExplanation('')
            }
            else {
              console.log(response);
@@ -212,7 +218,7 @@ const QuestionMultipleAnsExam = (props) => {
         <Typography sx={{font:'700 32px Poppins', color:'var(--grey, #707070)',alignSelf:'start', pb:"28px"}} >Question</Typography>
         <Box sx={{display:'flex', width:'100%'}}>
 
-            <Input
+            <Editor
             name='Question'
             required
             onInvalid={required}
@@ -265,7 +271,7 @@ const QuestionMultipleAnsExam = (props) => {
               label=""
               labelPlacement="start"
             />
-            <input
+            <Editor
             required
             name={`Option ${index+1}`}
             onInvalid={(e)=>{required(e,index+1)}}
@@ -309,7 +315,7 @@ const QuestionMultipleAnsExam = (props) => {
         <Typography sx={{cursor:'pointer', color:'#7A58E6', font:'700 20px Poppins', alignSelf:'end', mt:'32px'}} onClick={handleAddOption} aria-label="Add option" >Add Another Options</Typography>
         <Box sx={{width:'100%'}}>
         <Typography sx={{font:'700 32px Poppins', color:'var(--grey, #707070)',alignSelf:'start', pb:"28px", mt:'28px'}} >Explanation</Typography>
-          <TextField 
+          <Editor 
            InputProps={{ style: { background:'#EFF3F4', paddingLeft: '20px', borderRadius:'12px'} }}
            multiline
            placeholder='Explain the answer'

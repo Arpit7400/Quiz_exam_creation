@@ -10,7 +10,9 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { Link } from 'react-router-dom'
 import { sideDetail } from '../../styles/style';
+
 import axios from 'axios';
+import { FroalaEditorView } from 'react-froala-wysiwyg/FroalaEditorView';
 const SideDetails = ({heading, number}) => {
   const { questions,bool,openPage,quest,setQuestions,link} = State();
   useEffect(()=>{
@@ -67,12 +69,30 @@ const SideDetails = ({heading, number}) => {
       <Box>
         {questions?.map((data, i) => {
         const {question, options, id, explanation, quiz_type } = data
+        // const que = document.getElementById(`question${i}`);
+        // que.appendChild(question);
+
+
+
+        // var htmlContent = '<p>This is a <strong>new</strong> element with HTML content.</p>';
+
+        // // Option 1: Using innerHTML
+        // // var existingElement1 = document.getElementById('existingElement');
+        // // existingElement1.innerHTML += htmlContent;
+
+        // // Option 2: Using insertAdjacentHTML
+        // var existingElement2 = document.getElementById(`question${i}`);
+        // existingElement2.insertAdjacentHTML('beforeend', htmlContent);
+
+
+
+
           return (
           <div className='preview-question' key={i}>
             <Link to={`/update/${id}`} >
           <img src={edits} className='edit-logo' alt="" />
             </Link>
-            <Typography>{question}</Typography>
+            <div className='fr-view' dangerouslySetInnerHTML={{ __html: question }} ></div>
             
             <FormControl>
             <RadioGroup
@@ -83,16 +103,21 @@ const SideDetails = ({heading, number}) => {
               {options.map((option, i)=>{
                 const text = option.text
                 const is_answer = option.is_answer
-                
                 return(
-                  <FormControlLabel key={i}  disabled={!is_answer} value="option" control={<Radio />} label={text} />
+                  <Box key={i} sx={{display:'flex', alignItems:'center'}}>
+                    <FormControlLabel sx={{mr:'0px'}}  disabled={!is_answer} value="option" control={<Radio />} />
+                    <div className='fr-view' dangerouslySetInnerHTML={{ __html: text }} />
+                    
+                    
+                  </Box>
                   
                 )
               })}
             </RadioGroup>
             {explanation?
-            <Typography sx={{font:'500 20px Poppins'}}><strong>Explanation: </strong>{explanation}</Typography>
+            <div style={{font:'500 20px Poppins'}}><strong>Explanation: </strong><div className='fr-view' dangerouslySetInnerHTML={{ __html: explanation }}></div></div>
             :null}
+            {/* <FroalaEditorView model={explanation} /> */}
           </FormControl>
               </div>
         )

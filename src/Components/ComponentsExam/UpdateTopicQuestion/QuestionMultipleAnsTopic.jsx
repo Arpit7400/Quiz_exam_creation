@@ -16,6 +16,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import { State } from "../../Context/Provider"
 import axios from 'axios';
 import { enqueueSnackbar } from 'notistack';
+import Editor from '../../Editor';
 
 const QuestionMultipleAnsTopic = (props) => {
   const answer = props.answer.split(',')
@@ -24,7 +25,7 @@ const QuestionMultipleAnsTopic = (props) => {
   const [options, setOptions] = useState([]);
   const [selectedAnswerIndices, setSelectedAnswerIndices] = useState([]);
   const [drop, setdrop] = useState(props.type);
-  const [explanation, setExplanation] = useState('')
+  const [explanation, setExplanation] = useState(props.explanation)
 
   const handleExplanationChange = (event)=>{
     setExplanation(event.target.value)
@@ -44,13 +45,13 @@ const QuestionMultipleAnsTopic = (props) => {
   }, [])
   
   const handleQuestionChange = (event) => {
-    setQuestion({ ...question, text: event.target.value });
+    setQuestion({ ...question, text: event });
   };
 
 
   const handleOptionChange = (event, index) => {
     const newOptions = [...options];
-    newOptions[index].text = event.target.value;
+    newOptions[index].text = event;
     setOptions(newOptions);
   };
 
@@ -107,19 +108,21 @@ const QuestionMultipleAnsTopic = (props) => {
       setOptions(newOptions);
     }
   };
-
+  const handleRemovePTag = (text)=>{
+    return text.slice(3,-4)
+  }
    const handlePostQuestion = () => {
       const selectedAns = selectedAnswerIndices.map((ans)=>ans+1)
     const formData = new FormData();
     formData.append('question_type', drop);
-    formData.append('question_text', question.text);
+    formData.append('question_text', handleRemovePTag(question.text));
     formData.append('question_image', question.image);
     formData.append('answer', selectedAns);
 
     for (let i = 0; i < options.length; i++) {
       const optionText = options[i].text;
       const optionImageInput = options[i].image;
-      formData.append(`option${i + 1}`, optionText);
+      formData.append(`option${i + 1}`, handleRemovePTag(optionText));
       formData.append(`option${i + 1}_image`, optionImageInput); 
     }
     
@@ -170,7 +173,7 @@ const QuestionMultipleAnsTopic = (props) => {
         <Typography sx={{font:'700 32px Poppins', color:'var(--grey, #707070)',alignSelf:'start', pb:"28px"}} >Question</Typography>
         <Box sx={{display:'flex', width:'100%'}}>
 
-            <Input
+            <Editor
              name='Question'
              required
              onInvalid={required}
@@ -213,7 +216,7 @@ const QuestionMultipleAnsTopic = (props) => {
               label=""
               labelPlacement="start"
             />
-            <input
+            <Editor
              required
              name={`Option ${index+1}`}
              onInvalid={(e)=>{required(e,index+1)}}

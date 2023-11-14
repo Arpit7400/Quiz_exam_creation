@@ -15,6 +15,7 @@ import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import { State } from '../../Context/Provider';
 import axios from 'axios';
 import { enqueueSnackbar } from 'notistack';
+import Editor from '../../Editor';
 
 const QuestionTrueFalseTopicExam = ( props  ) => {
 
@@ -23,7 +24,7 @@ const QuestionTrueFalseTopicExam = ( props  ) => {
   const [question, setQuestion] = useState({ text: props.question, image: null });
   const [selectedAnswer, setSelectedAnswer] = useState(parseInt(props.answer));
   const [options, setOptions] = useState([]);
-  const [explanation, setExplanation] = useState('')
+  const [explanation, setExplanation] = useState(props.explanation)
 
   const handleExplanationChange = (event)=>{
     setExplanation(event.target.value)
@@ -31,7 +32,7 @@ const QuestionTrueFalseTopicExam = ( props  ) => {
 
 
   const handleQuestionChange = (event) => {
-    setQuestion({ ...question, text: event.target.value });
+    setQuestion({ ...question, text: event });
   };
   const [drop, setdrop] = useState(props.type);
   useEffect(() => {
@@ -52,7 +53,7 @@ const QuestionTrueFalseTopicExam = ( props  ) => {
   };
   const handleOptionChange = (event, index) => {
     const updatedOptions = [...options];
-    updatedOptions[index].text = event.target.value;
+    updatedOptions[index].text = event;
     setOptions(updatedOptions);
   };
 
@@ -73,6 +74,9 @@ const QuestionTrueFalseTopicExam = ( props  ) => {
     updatedOptions[index].text = '';
     setOptions(updatedOptions);
   };
+  const handleRemovePTag = (text)=>{
+    return text.slice(3,-4)
+  }
 
   const handlePostQuestion = () => {
     const answer = parseInt(selectedAnswer)
@@ -81,7 +85,7 @@ const QuestionTrueFalseTopicExam = ( props  ) => {
       const formData = new FormData();
     // formData.append('question_no', examid.qno); 
     formData.append('question_type', drop);
-    formData.append('question_text', question.text);
+    formData.append('question_text', (question.text));
     formData.append('question_image', question.image);
     formData.append('answer', answer);
 
@@ -142,7 +146,7 @@ const QuestionTrueFalseTopicExam = ( props  ) => {
         Question
       </Typography>
       <Box sx={{display:'flex', width:'100%'}}>
-      <Input
+      <Editor
        name='Question'
        required
        onInvalid={required}
@@ -175,7 +179,7 @@ const QuestionTrueFalseTopicExam = ( props  ) => {
             checked={selectedAnswer === index}
             onChange={() => handleRadioChange(index)}
           />
-          <Input
+          <Editor
            required
            name={`Option ${index+1}`}
            onInvalid={(e)=>{required(e,index+1)}}

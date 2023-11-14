@@ -9,6 +9,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import axios from 'axios'
 import { State } from '../../Context/Provider'
 import { enqueueSnackbar } from "notistack";
+import Editor from "../../Editor";
 
 const PreviewExamEdit = ({ open, setOpen,handleOpen,data}) => {
   const [correctAnswerIndex, setCorrectAnswerIndex] = useState(parseInt(data.ans));
@@ -17,12 +18,12 @@ const PreviewExamEdit = ({ open, setOpen,handleOpen,data}) => {
   const {boo,setboo,link} = State()
 
   const handleQuestionChange = (event) => {
-    setQuestion({ ...question, text: event.target.value });
+    setQuestion({ ...question, text: event });
   };
 
   const handleOptionChange = (event, index) => {
     const newOptions = [...options];
-    newOptions[index].text = event.target.value;
+    newOptions[index].text = event;
     setOptions(newOptions);
   };
 
@@ -186,7 +187,7 @@ const PreviewExamEdit = ({ open, setOpen,handleOpen,data}) => {
             </CustomWidthTooltip>
             {/* <img style={{ height: "80px", width: "80px", objectFit: "contain", marginRight:'12px' }} src={userImg} /> */}
             <Box sx={{ display: "grid", width: "100%", gridTemplateColumns: "11fr 1fr", alignItems: "center",}}>
-                  <TextField
+                  <Editor
                   name='Question'
                   required
                   onInvalid={required}
@@ -259,7 +260,7 @@ const PreviewExamEdit = ({ open, setOpen,handleOpen,data}) => {
                   labelPlacement="start"
                 />
 
-                <TextField
+                <Editor
                 required
                 name={`Option ${index+1}`}
                 onInvalid={(e)=>{required(e,index+1)}}

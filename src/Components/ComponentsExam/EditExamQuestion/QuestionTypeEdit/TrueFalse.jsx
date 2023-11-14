@@ -10,6 +10,7 @@ import userImg from "../../../../Data/userImg.png"
 import { State } from "../../../Context/Provider";
 import axios from "axios";
 import { enqueueSnackbar } from "notistack";
+import Editor from "../../../Editor";
 
 
 const TrueFalse = (props, { open, setOpen, }) => {
@@ -19,10 +20,10 @@ const TrueFalse = (props, { open, setOpen, }) => {
   const [question, setQuestion] = useState({ text: data.question_text, image: null, img: data.question_image});
   const [selectedAnswer, setSelectedAnswer] = useState(parseInt(data.answer));
   const [options, setOptions] = useState([]);
-  const [explanation, setExplanation] = useState('')
+  const [explanation, setExplanation] = useState(data.explanation)
 
   const handleExplanationChange = (event)=>{
-    setExplanation(event.target.value)
+    setExplanation(event)
   }
 
   useEffect(() => {
@@ -34,7 +35,7 @@ const TrueFalse = (props, { open, setOpen, }) => {
   }, [])
   
   const handleQuestionChange = (event) => {
-    setQuestion({ ...question, text: event.target.value });
+    setQuestion({ ...question, text: event});
   };
 
   const handleRadioChange = (event, selectedIndex) => {
@@ -51,7 +52,7 @@ const TrueFalse = (props, { open, setOpen, }) => {
 
   const handleOptionChange = (event, index) => {
     const updatedOptions = [...options];
-    updatedOptions[index].text = event.target.value;
+    updatedOptions[index].text = event;
     setOptions(updatedOptions);
   };
 
@@ -169,7 +170,7 @@ const TrueFalse = (props, { open, setOpen, }) => {
             </CustomWidthTooltip>
             {/* <img style={{ height: "80px", width: "80px", objectFit: "contain", marginRight:'12px' }} src={userImg} /> */}
             <Box sx={{ display: "grid", width: "100%", gridTemplateColumns: "11fr 1fr", alignItems: "center",}}>
-                  <TextField
+                  <Editor
                    name='Question'
                    required
                    onInvalid={required}
@@ -242,7 +243,7 @@ const TrueFalse = (props, { open, setOpen, }) => {
                   labelPlacement="start"
                 />
 
-                <TextField
+                <Editor
                  required
                  name={`Option ${index+1}`}
                  onInvalid={(e)=>{required(e,index+1)}}
@@ -304,7 +305,7 @@ const TrueFalse = (props, { open, setOpen, }) => {
             <span></span>
             <Box sx={{width:'100%'}}>
         <Typography sx={{font:'700 32px Poppins', color:'var(--grey, #707070)',alignSelf:'start', pb:"28px", mt:'28px'}} >Explanation</Typography>
-          <TextField 
+          <Editor 
            InputProps={{ style: { background:'#EFF3F4', paddingLeft: '20px', borderRadius:'12px'} }}
            multiline
            placeholder='Explain the answer'

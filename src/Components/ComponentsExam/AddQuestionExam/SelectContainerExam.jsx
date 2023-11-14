@@ -8,7 +8,7 @@ import axios from 'axios'
 
 const SelectContainerExam = () => {
   const { exam,  desubject, destopic,setdesubject,setedstopic,setdlanguage,link} = State();
-  const [classs,setclasss]=useState([ "1", "2", "3", "4", "5", "6", "7", "8", "9","10","11","12", 'UG', 'PG', 'UPSC', 'SSC', 'IIT'])
+  const [classs,setclasss]=useState([ "1", "2", "3", "4", "5", "6", "7", "8", "9","10","11","12", 'UG', 'PG', 'UPSC', 'SSC', 'IIT', 'Olympiad'])
   const ExamDuration = [
     '10 Minutes', '20 Minutes', '30 Minutes', '40 Minutes', '50 Minutes', '60 Minutes', '70 Minutes', '80 Minutes', '90 Minutes', '100 Minutes', 
     '110 Minutes', '120 Minutes', '130 Minutes', '140 Minutes', '150 Minutes', '160 Minutes', '170 Minutes', '180 Minutes', '190 Minutes' 

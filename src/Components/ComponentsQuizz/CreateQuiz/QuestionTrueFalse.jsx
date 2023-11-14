@@ -16,6 +16,7 @@ import { State } from '../../Context/Provider';
 import axios from 'axios';
 import { btn, qStyle } from '../../../styles/style';
 import { enqueueSnackbar } from 'notistack';
+import Editor from '../../Editor';
 
 const QuestionTrueFalse = ({ handleThreeDotMenu, prop  }) => {
 
@@ -29,11 +30,11 @@ const QuestionTrueFalse = ({ handleThreeDotMenu, prop  }) => {
   const [explanation, setExplanation] = useState('')
 
   const handleExplanationChange = (event)=>{
-    setExplanation(event.target.value)
+    setExplanation(event)
   }
 
   const handleQuestionChange = (event) => {
-    setQuestion({ ...question, text: event.target.value });
+    setQuestion({ ...question, text: event });
   };
 
   const handleRadioChange = (selectedIndex) => {
@@ -48,7 +49,7 @@ const QuestionTrueFalse = ({ handleThreeDotMenu, prop  }) => {
 
   const handleOptionChange = (event, index) => {
     const updatedOptions = [...options];
-    updatedOptions[index].text = event.target.value;
+    updatedOptions[index].text = event;
     setOptions(updatedOptions);
   };
 
@@ -69,6 +70,9 @@ const QuestionTrueFalse = ({ handleThreeDotMenu, prop  }) => {
     updatedOptions[index].text = '';
     setOptions(updatedOptions);
   };
+  const handleRemovePTag = (text)=>{
+    return text.slice(3,-4)
+  }
 
   const handlePostQuestion = () => {
     if (!quest.Language || !quest.Class || !quest.Subject || !quest.Topic|| !quest.Sub_topic||!quest.Level|| !quest.Quiz_Type  ) {
@@ -91,14 +95,15 @@ const QuestionTrueFalse = ({ handleThreeDotMenu, prop  }) => {
     formData.append('subtopic', quest.Sub_topic);
     formData.append('level', quest.Level);
     formData.append('quiz_type', quizType);
-    formData.append('question', question.text);
+    formData.append('question', handleRemovePTag(question.text));
     formData.append('question_image', question.image);
+    formData.append('explanation', handleRemovePTag(explanation));
 
     const popt = [],QUE=question.text;
     for (let i = 0; i < options.length; i++) {
       const optionText = options[i].text;
       const optionImageInput = options[i].image;
-      formData.append(`option_${i + 1}`, optionText);
+      formData.append(`option_${i + 1}`, handleRemovePTag(optionText));
       formData.append(`option_${i + 1}_image`, optionImageInput);
       const isAnswer = options[i].answer;
       formData.append(`is_answer_${i + 1}`, isAnswer.toString());
@@ -166,7 +171,7 @@ const QuestionTrueFalse = ({ handleThreeDotMenu, prop  }) => {
         Question
       </Typography>
       <Box sx={{display:'flex', width:'100%'}}>
-      <Input
+      <Editor
             name='Question'
                 disableUnderline = {true}
                 required
@@ -207,7 +212,7 @@ const QuestionTrueFalse = ({ handleThreeDotMenu, prop  }) => {
             onChange={() => handleRadioChange(index)}
             onInvalid={required}
           />
-          <Input
+          <Editor
                       required
                       name={`Option ${index+1}`}
                         placeholder={`Option ${index+1}`}
@@ -239,7 +244,7 @@ const QuestionTrueFalse = ({ handleThreeDotMenu, prop  }) => {
       
       <Box sx={{width:'100%'}}>
         <Typography sx={{font:'700 32px Poppins', color:'var(--grey, #707070)',alignSelf:'start', pb:"28px", mt:'28px'}} >Explanation</Typography>
-          <TextField 
+          <Editor 
            InputProps={{ style: { background:'#EFF3F4', paddingLeft: '20px', borderRadius:'12px'} }}
            multiline
            placeholder='Explain the answer'

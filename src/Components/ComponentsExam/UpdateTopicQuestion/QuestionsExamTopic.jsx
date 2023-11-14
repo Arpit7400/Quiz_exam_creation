@@ -17,6 +17,7 @@ import { State } from "../../Context/Provider"
 import axios from 'axios';
 import SelectMenuTopicUpdate from './SelectMenuTopicUpdate';
 import { enqueueSnackbar } from 'notistack';
+import Editor from '../../Editor';
 
 const QuestionsExamTopic = (props) => {
   const { setexamquest,exam,examid,setexamid, quest,link} = State();
@@ -24,7 +25,7 @@ const QuestionsExamTopic = (props) => {
   const [options, setOptions] = useState([
   ]);
   const [drop, setdrop] = useState(props.type);
-  const [explanation, setExplanation] = useState('')
+  const [explanation, setExplanation] = useState(props.explanation)
 
   const handleExplanationChange = (event)=>{
     setExplanation(event.target.value)
@@ -40,12 +41,12 @@ const QuestionsExamTopic = (props) => {
   const [correctAnswerIndex, setCorrectAnswerIndex] = useState(parseInt(props.answer));
 
   const handleQuestionChange = (event) => {
-    setQuestion({ ...question, text: event.target.value });
+    setQuestion({ ...question, text: event });
   };
 
   const handleOptionChange = (event, index) => {
     const newOptions = [...options];
-    newOptions[index].text = event.target.value;
+    newOptions[index].text = event;
     setOptions(newOptions);
   };
 
@@ -88,18 +89,20 @@ const QuestionsExamTopic = (props) => {
       setOptions(newOptions);
     }
   };
-
+  const handleRemovePTag = (text)=>{
+    return text.slice(3,-4)
+  }
   const handlePostQuestion = () => {
     const formData = new FormData();
     formData.append('question_type', drop);
-    formData.append('question_text', question.text);
+    formData.append('question_text', handleRemovePTag(question.text));
     formData.append('question_image', question.image);
     formData.append('answer', correctAnswerIndex+1);
 
     for (let i = 0; i < options.length; i++) {
       const optionText = options[i].text;
       const optionImageInput = options[i].image;
-      formData.append(`option${i + 1}`, optionText);
+      formData.append(`option${i + 1}`, handleRemovePTag(optionText));
       formData.append(`option${i + 1}_image`, optionImageInput); 
     }
     
@@ -154,7 +157,7 @@ const QuestionsExamTopic = (props) => {
         <Typography sx={{font:'700 32px Poppins', color:'var(--grey, #707070)',alignSelf:'start', pb:"28px"}} >Question</Typography>
         <Box sx={{display:'flex', width:'100%'}}>
 
-            <Input
+            <Editor
              name='Question'
              required
              onInvalid={required}
@@ -195,7 +198,7 @@ const QuestionsExamTopic = (props) => {
                         labelPlacement="start"
                         
                     />
-                    <Input
+                    <Editor
                      required
                      name={`Option ${index+1}`}
                      onInvalid={(e)=>{required(e,index+1)}}

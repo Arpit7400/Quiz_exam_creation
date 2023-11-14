@@ -10,6 +10,7 @@ import userImg from "../../../../Data/userImg.png"
 import { State } from "../../../Context/Provider";
 import axios from "axios";
 import { enqueueSnackbar } from "notistack";
+import Editor from "../../../Editor";
 const SingleAns = (props,{ open, setOpen,}) => {
   const data=props.qdata
   // console.log(data)
@@ -18,10 +19,10 @@ const SingleAns = (props,{ open, setOpen,}) => {
   const [correctAnswerIndex, setCorrectAnswerIndex] = useState(parseInt(data.answer));
   const [question, setQuestion] = useState({ text: data.question_text, image: null, img: data.question_image});
   const [options, setOptions] = useState([]);
-  const [explanation, setExplanation] = useState('')
+  const [explanation, setExplanation] = useState(data.explanation)
 
   const handleExplanationChange = (event)=>{
-    setExplanation(event.target.value)
+    setExplanation(event)
   }
 
 
@@ -33,12 +34,12 @@ const SingleAns = (props,{ open, setOpen,}) => {
     }
   },[])
   const handleQuestionChange = (event) => {
-    setQuestion({ ...question, text: event.target.value });
+    setQuestion({ ...question, text: event });
   };
 
   const handleOptionChange = (event, index) => {
     const newOptions = [...options];
-    newOptions[index].text = event.target.value;
+    newOptions[index].text = event;
     setOptions(newOptions);
   };
 
@@ -185,7 +186,7 @@ const SingleAns = (props,{ open, setOpen,}) => {
             </CustomWidthTooltip>
             {/* <img style={{ height: "80px", width: "80px", objectFit: "contain", marginRight:'12px' }} src={userImg} /> */}
             <Box sx={{ display: "grid", width: "100%", gridTemplateColumns: "11fr 1fr", alignItems: "center",}}>
-                  <TextField
+                  <Editor
                    name='Question'
                    required
                    onInvalid={required}
@@ -259,7 +260,7 @@ const SingleAns = (props,{ open, setOpen,}) => {
                   labelPlacement="start"
                 />
 
-                <TextField
+                <Editor
                  required
                  name={`Option ${index+1}`}
                  onInvalid={(e)=>{required(e,index+1)}}
@@ -340,7 +341,7 @@ const SingleAns = (props,{ open, setOpen,}) => {
             
         <Box sx={{width:'100%'}}>
         <Typography sx={{font:'700 32px Poppins', color:'var(--grey, #707070)',alignSelf:'start', pb:"28px", mt:'28px'}} >Explanation</Typography>
-          <TextField 
+          <Editor
            InputProps={{ style: { background:'#EFF3F4', paddingLeft: '20px', borderRadius:'12px'} }}
            multiline
            placeholder='Explain the answer'

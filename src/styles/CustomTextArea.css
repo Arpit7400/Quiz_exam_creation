@@ -30,3 +30,29 @@
 .css-15pxztp-MuiButtonBase-root-MuiTab-root.Mui-selected {
     color: #fff !important;
 }
+
+
+
+
+
+/* css for froala-editor  */
+.math-editor .fr-toolbar {
+    position: absolute;
+    right: 0px;
+    top: 6px !important;
+}
+.math-editor .fr-wrapper {
+    border: none !important;
+}
+.math-editor .fr-element {
+    padding: 11px 27px;
+    border-radius: 12px;
+    background: rgb(239, 243, 244);
+    width: 100%;
+    border: none;
+    color: rgb(112, 112, 112);
+    font-size: 18px;
+}
+.math-editor .fr-element.fr-view {
+    padding-right: 100px;
+}
